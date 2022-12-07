@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:sarvam/routes/app_pages.dart';
+import 'package:sarvam/screens/loginScreen/login_screen_controller.dart';
 import 'package:sarvam/utils/const_colors_key.dart';
 import 'package:sarvam/utils/const_fonts_key.dart';
 import 'package:sarvam/utils/const_image_key.dart';
-import 'package:sarvam/utils/const_key.dart';
 import 'package:sarvam/widgets/custom_button.dart';
 import 'package:sarvam/widgets/custom_text_field.dart';
 
@@ -20,8 +20,9 @@ class _LoginScreenState extends State<LoginScreen> {
   bool obscuredText = true;
   bool isChecked = false;
   final storage = GetStorage();
-  TextEditingController email = TextEditingController();
-  TextEditingController password = TextEditingController();
+  TextEditingController email = TextEditingController(text: "");
+  TextEditingController password = TextEditingController(text: "");
+  LoginScreenController loginScreenController = Get.put(LoginScreenController());
 
   void passwordHideShow() {
     setState(() {
@@ -151,8 +152,13 @@ class _LoginScreenState extends State<LoginScreen> {
                               borderColor: Colors.white,
                               buttonColor: Colors.transparent,
                               onTap: () async {
-                                await storage.write(LOGIN_TRUE, true);
-                                Get.toNamed(Routes.HOME_SCREEN);
+                                if (email.text.toString().isEmpty) {
+                                  Get.snackbar("Oops!", "Email required!", icon: const Icon(Icons.error, color: Colors.red), duration: const Duration(seconds: 1), colorText: Colors.white, snackPosition: SnackPosition.TOP, backgroundColor: backgroundCyan);
+                                } else if (password.text.toString().isEmpty) {
+                                  Get.snackbar("Oops!", "Password required!", icon: const Icon(Icons.error, color: Colors.red), duration: const Duration(seconds: 1), colorText: Colors.white, snackPosition: SnackPosition.TOP, backgroundColor: backgroundCyan);
+                                } else {
+                                  await loginScreenController.logIn(email.text.trim().toString(), password.text.trim().toString());
+                                }
                               },
                             ),
                           ),

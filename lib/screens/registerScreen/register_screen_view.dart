@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:sarvam/routes/app_pages.dart';
+import 'package:sarvam/screens/registerScreen/register_screen_controller.dart';
 import 'package:sarvam/utils/const_colors_key.dart';
 import 'package:sarvam/utils/const_fonts_key.dart';
 import 'package:sarvam/utils/const_image_key.dart';
@@ -19,8 +20,10 @@ class RegisterScreen extends StatefulWidget {
 }
 
 class _RegisterScreenState extends State<RegisterScreen> {
+  RegisterScreenController registerScreenController = Get.put(RegisterScreenController());
   TextEditingController name = TextEditingController();
   TextEditingController email = TextEditingController();
+  TextEditingController password = TextEditingController();
   TextEditingController phoneNumber = TextEditingController();
   TextEditingController postalCode = TextEditingController();
   TextEditingController address = TextEditingController();
@@ -559,6 +562,18 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     ),
                     const SizedBox(height: 20),
                     const Text(
+                      "Password*",
+                      style: TextStyle(color: backgroundWhite, fontSize: 16, fontFamily: ROBOTO_MEDIUM),
+                    ),
+                    const SizedBox(height: 5),
+                    CustomTextField(
+                      textEditingController: password,
+                      keyboardType: TextInputType.text,
+                      textInputAction: TextInputAction.next,
+                      hint: "Enter Your Password",
+                    ),
+                    const SizedBox(height: 20),
+                    const Text(
                       "Date of Birth*",
                       style: TextStyle(color: backgroundWhite, fontSize: 16, fontFamily: ROBOTO_MEDIUM),
                     ),
@@ -805,8 +820,32 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         borderColor: Colors.white,
                         buttonColor: Colors.transparent,
                         onTap: () async {
-                          await storage.write(LOGIN_TRUE, true);
-                          Get.toNamed(Routes.HOME_SCREEN);
+                          if (name.text.toString().isEmpty) {
+                            Get.snackbar("Oops!", "Name required!", icon: const Icon(Icons.error, color: Colors.red), duration: const Duration(seconds: 1), colorText: Colors.white, snackPosition: SnackPosition.TOP, backgroundColor: backgroundCyan);
+                          } else if (email.text.toString().isEmpty) {
+                            Get.snackbar("Oops!", "Email required!", icon: const Icon(Icons.error, color: Colors.red), duration: const Duration(seconds: 1), colorText: Colors.white, snackPosition: SnackPosition.TOP, backgroundColor: backgroundCyan);
+                          } else if (password.text.toString().isEmpty) {
+                            Get.snackbar("Oops!", "Password required!", icon: const Icon(Icons.error, color: Colors.red), duration: const Duration(seconds: 1), colorText: Colors.white, snackPosition: SnackPosition.TOP, backgroundColor: backgroundCyan);
+                          } else if (selectedDate == "") {
+                            Get.snackbar("Oops!", "Date of Birth required!", icon: const Icon(Icons.error, color: Colors.red), duration: const Duration(seconds: 1), colorText: Colors.white, snackPosition: SnackPosition.TOP, backgroundColor: backgroundCyan);
+                          } else if (phoneNumber.text.toString().isEmpty) {
+                            Get.snackbar("Oops!", "PhoneNumber required!", icon: const Icon(Icons.error, color: Colors.red), duration: const Duration(seconds: 1), colorText: Colors.white, snackPosition: SnackPosition.TOP, backgroundColor: backgroundCyan);
+                          } else if (postalCode.text.toString().isEmpty) {
+                            Get.snackbar("Oops!", "Pincode required!", icon: const Icon(Icons.error, color: Colors.red), duration: const Duration(seconds: 1), colorText: Colors.white, snackPosition: SnackPosition.TOP, backgroundColor: backgroundCyan);
+                          } else if (address.text.toString().isEmpty) {
+                            Get.snackbar("Oops!", "Address required!", icon: const Icon(Icons.error, color: Colors.red), duration: const Duration(seconds: 1), colorText: Colors.white, snackPosition: SnackPosition.TOP, backgroundColor: backgroundCyan);
+                          } else {
+                            print(name.text);
+                            print(email.text);
+                            print(password.text);
+                            print(selectedDate);
+                            print(selectedPhoneCode);
+                            print(phoneNumber.text);
+                            print(selectedCountry);
+                            print(postalCode.text);
+                            print(address.text);
+                            print(role);
+                          }
                         },
                       ),
                     ),

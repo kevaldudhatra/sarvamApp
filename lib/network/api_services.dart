@@ -3,6 +3,6 @@
 class ApiServices {
   static String baseUrl = "https://sarvam.whizapps.in/API/Service.svc/";
 
-  static String Login = '${baseUrl}login';
-  static String Register = '${baseUrl}register';
+  static String Login = '$baseUrl/Login';
+  static String SignUp = '$baseUrl/SignUp';
 }
