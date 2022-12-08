@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:sarvam/routes/app_pages.dart';
 import 'package:sarvam/utils/const_colors_key.dart';
 import 'package:sarvam/utils/const_fonts_key.dart';
@@ -12,6 +14,8 @@ class SubscriptionScreenView extends StatefulWidget {
 }
 
 class _SubscriptionScreenViewState extends State<SubscriptionScreenView> {
+  final storage = GetStorage();
+
   @override
   void initState() {
     super.initState();
@@ -52,7 +56,15 @@ class _SubscriptionScreenViewState extends State<SubscriptionScreenView> {
                     children: [
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [Image.asset(AppImages().drawerIcon, fit: BoxFit.fill, scale: 2.5), Image.asset(AppImages().profileIcon, fit: BoxFit.fill, scale: 3)],
+                        children: [
+                          Image.asset(AppImages().drawerIcon, fit: BoxFit.fill, scale: 2.5),
+                          InkWell(
+                              onTap: () {
+                                storage.erase();
+                                Get.toNamed(Routes.WELCOME_SCREEN);
+                              },
+                              child: Image.asset(AppImages().profileIcon, fit: BoxFit.fill, scale: 3))
+                        ],
                       ),
                       Container(
                         margin: EdgeInsets.only(top: height * 0.05),
@@ -116,7 +128,7 @@ class _SubscriptionScreenViewState extends State<SubscriptionScreenView> {
                                 ],
                               ),
                             ),
-                            Image.asset(AppImages().dividerIcon, height: height * 0.02, width: 150,fit: BoxFit.fitWidth),
+                            Image.asset(AppImages().dividerIcon, height: height * 0.02, width: 150, fit: BoxFit.fitWidth),
                             Container(
                               height: height * 0.13,
                               padding: const EdgeInsets.symmetric(horizontal: 10),
@@ -136,7 +148,7 @@ class _SubscriptionScreenViewState extends State<SubscriptionScreenView> {
                                             decoration: const BoxDecoration(color: backgroundWhite, shape: BoxShape.circle),
                                           ),
                                           const Expanded(
-                                            child:  Text(
+                                            child: Text(
                                               "Lorem ipsum is a text",
                                               style: TextStyle(fontSize: 10, fontFamily: ROBOTO_REGULAR, color: backgroundWhite),
                                             ),
@@ -154,12 +166,12 @@ class _SubscriptionScreenViewState extends State<SubscriptionScreenView> {
                                             margin: const EdgeInsets.only(right: 5),
                                             decoration: const BoxDecoration(color: backgroundWhite, shape: BoxShape.circle),
                                           ),
-                                           const Expanded(
-                                             child: Text(
+                                          const Expanded(
+                                            child: Text(
                                               "Lorem ipsum is a text",
                                               style: TextStyle(fontSize: 10, fontFamily: ROBOTO_REGULAR, color: backgroundWhite),
+                                            ),
                                           ),
-                                           ),
                                         ],
                                       ),
                                     ],
@@ -230,7 +242,7 @@ class _SubscriptionScreenViewState extends State<SubscriptionScreenView> {
                                           ],
                                         ),
                                       ),
-                                      Image.asset(AppImages().dividerIcon, height: height * 0.02, width: 150,fit: BoxFit.fitWidth),
+                                      Image.asset(AppImages().dividerIcon, height: height * 0.02, width: 150, fit: BoxFit.fitWidth),
                                       Container(
                                         height: height * 0.13,
                                         padding: const EdgeInsets.symmetric(horizontal: 10),
@@ -269,7 +281,7 @@ class _SubscriptionScreenViewState extends State<SubscriptionScreenView> {
                                                       decoration: const BoxDecoration(color: backgroundWhite, shape: BoxShape.circle),
                                                     ),
                                                     const Expanded(
-                                                      child:  Text(
+                                                      child: Text(
                                                         "Lorem ipsum is a text",
                                                         style: TextStyle(fontSize: 10, fontFamily: ROBOTO_REGULAR, color: backgroundWhite),
                                                       ),
@@ -336,7 +348,7 @@ class _SubscriptionScreenViewState extends State<SubscriptionScreenView> {
                                           ],
                                         ),
                                       ),
-                                      Image.asset(AppImages().dividerIcon, height: height * 0.02, width: 150,fit: BoxFit.fitWidth),
+                                      Image.asset(AppImages().dividerIcon, height: height * 0.02, width: 150, fit: BoxFit.fitWidth),
                                       Container(
                                         height: height * 0.13,
                                         padding: const EdgeInsets.symmetric(horizontal: 10),

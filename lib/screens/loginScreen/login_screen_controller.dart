@@ -18,7 +18,7 @@ class LoginScreenController extends GetxController {
     if (isLoading) {
       Get.dialog(LoadingDialog(), barrierDismissible: false);
     }
-    var response = await http.post(Uri.parse(ApiServices.Login), headers: {"Content-Type": "application/json"}, body: jsonEncode({"APIKey": API_KEY, "CallFrom": "Android", "EmailID": email, "Pass": password}));
+    var response = await http.post(Uri.parse(ApiServices.Login), headers: {"Content-Type": "application/json"}, body: jsonEncode({"APIKey": API_KEY, "CallFrom": PLATFORM, "EmailID": email, "Pass": password}));
     print('logIn Response status: ${response.statusCode}');
     print('logIn Response body: ${response.body}');
     if (isLoading && Get.isDialogOpen!) {

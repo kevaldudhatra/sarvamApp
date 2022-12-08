@@ -5,4 +5,5 @@ class ApiServices {
 
   static String Login = '$baseUrl/Login';
   static String SignUp = '$baseUrl/SignUp';
+  static String ForgotPassword = '$baseUrl/ForgotPass';
 }

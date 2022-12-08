@@ -11,6 +11,7 @@ import 'package:sarvam/screens/membershipScreen/membership_screen_view.dart';
 import 'package:sarvam/screens/prayerDetailScreen/prayer_detail_screen_view.dart';
 import 'package:sarvam/screens/prayerScreen/prayer_screen_view.dart';
 import 'package:sarvam/screens/registerScreen/register_screen_view.dart';
+import 'package:sarvam/screens/resetPasswordScreen/reset_password_screen_view.dart';
 import 'package:sarvam/screens/subscriptionScreen/subscription_screen_view.dart';
 import 'package:sarvam/screens/uploadWorkScreen/upload_screen_view.dart';
 import 'package:sarvam/screens/welcomeScreen/welcome_screen_view.dart';
@@ -60,6 +61,14 @@ class RouteGenerator {
         return GetPageRoute(
           routeName: settings.name,
           page: () => const ForgotPasswordScreen(),
+          transition: Transition.noTransition,
+          transitionDuration: Duration(milliseconds: duration),
+        );
+
+      case Routes.RESET_PASSWORD_SCREEN:
+        return GetPageRoute(
+          routeName: settings.name,
+          page: () => const ResetPasswordScreen(),
           transition: Transition.noTransition,
           transitionDuration: Duration(milliseconds: duration),
         );

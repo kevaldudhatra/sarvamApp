@@ -8,6 +8,7 @@ abstract class Routes {
   static const LOGIN_SCREEN = '/loginScreen';
   static const REGISTER_SCREEN = '/registerScreen';
   static const FORGOT_PASSWORD_SCREEN = '/forgotPasswordScreen';
+  static const RESET_PASSWORD_SCREEN = '/resetPasswordScreen';
 
   static const HOME_SCREEN = '/homeScreen';
   static const SUBSCRIPTION_SCREEN = '/subscriptionScreen';
