@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:sarvam/routes/app_pages.dart';
+import 'package:sarvam/screens/subscriptionScreen/subscription_screen_controller.dart';
 import 'package:sarvam/utils/const_colors_key.dart';
 import 'package:sarvam/utils/const_fonts_key.dart';
 import 'package:sarvam/utils/const_image_key.dart';
@@ -15,9 +15,20 @@ class SubscriptionScreenView extends StatefulWidget {
 
 class _SubscriptionScreenViewState extends State<SubscriptionScreenView> {
   final storage = GetStorage();
+  SubscriptionScreenController subscriptionScreenController = SubscriptionScreenController();
+  List plans = [];
 
   @override
   void initState() {
+    Future.delayed(const Duration(seconds: 0), () {
+      subscriptionScreenController.getPlans().then((value) => {
+            if (value != Null)
+              {
+                plans = value,
+                setState(() {}),
+              }
+          });
+    });
     super.initState();
   }
 
@@ -56,15 +67,7 @@ class _SubscriptionScreenViewState extends State<SubscriptionScreenView> {
                     children: [
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Image.asset(AppImages().drawerIcon, fit: BoxFit.fill, scale: 2.5),
-                          InkWell(
-                              onTap: () {
-                                storage.erase();
-                                Get.toNamed(Routes.WELCOME_SCREEN);
-                              },
-                              child: Image.asset(AppImages().profileIcon, fit: BoxFit.fill, scale: 3))
-                        ],
+                        children: [Image.asset(AppImages().drawerIcon, fit: BoxFit.fill, scale: 2.5), Image.asset(AppImages().profileIcon, fit: BoxFit.fill, scale: 3)],
                       ),
                       Container(
                         margin: EdgeInsets.only(top: height * 0.05),
@@ -105,9 +108,9 @@ class _SubscriptionScreenViewState extends State<SubscriptionScreenView> {
                                 children: [
                                   Column(
                                     children: [
-                                      const Text(
-                                        "FREE",
-                                        style: TextStyle(
+                                      Text(
+                                        plans[0]["Name"],
+                                        style: const TextStyle(
                                           fontSize: 18,
                                           fontFamily: ROBOTO_MEDIUM,
                                           color: backgroundWhite,
@@ -117,13 +120,13 @@ class _SubscriptionScreenViewState extends State<SubscriptionScreenView> {
                                       Image.asset(AppImages().dashedLineIcon, width: 55)
                                     ],
                                   ),
-                                  const Text(
-                                    "\$0",
-                                    style: TextStyle(fontSize: 30, fontFamily: ROBOTO_BOLD, color: backgroundWhite),
+                                  Text(
+                                    "\$${plans[0]["Price"]}",
+                                    style: const TextStyle(fontSize: 30, fontFamily: ROBOTO_BOLD, color: backgroundWhite),
                                   ),
-                                  const Text(
-                                    "Every 6 Months",
-                                    style: TextStyle(fontSize: 10, fontFamily: ROBOTO_REGULAR, color: backgroundWhite),
+                                  Text(
+                                    "Every ${plans[0]["Months"]} Months",
+                                    style: const TextStyle(fontSize: 10, fontFamily: ROBOTO_REGULAR, color: backgroundWhite),
                                   ),
                                 ],
                               ),
@@ -147,10 +150,10 @@ class _SubscriptionScreenViewState extends State<SubscriptionScreenView> {
                                             margin: const EdgeInsets.only(right: 5),
                                             decoration: const BoxDecoration(color: backgroundWhite, shape: BoxShape.circle),
                                           ),
-                                          const Expanded(
+                                          Expanded(
                                             child: Text(
-                                              "Lorem ipsum is a text",
-                                              style: TextStyle(fontSize: 10, fontFamily: ROBOTO_REGULAR, color: backgroundWhite),
+                                              plans[0]["ShortDesp"],
+                                              style: const TextStyle(fontSize: 10, fontFamily: ROBOTO_REGULAR, color: backgroundWhite),
                                             ),
                                           ),
                                         ],
@@ -166,10 +169,10 @@ class _SubscriptionScreenViewState extends State<SubscriptionScreenView> {
                                             margin: const EdgeInsets.only(right: 5),
                                             decoration: const BoxDecoration(color: backgroundWhite, shape: BoxShape.circle),
                                           ),
-                                          const Expanded(
+                                          Expanded(
                                             child: Text(
-                                              "Lorem ipsum is a text",
-                                              style: TextStyle(fontSize: 10, fontFamily: ROBOTO_REGULAR, color: backgroundWhite),
+                                              plans[0]["ShortDesp"],
+                                              style: const TextStyle(fontSize: 10, fontFamily: ROBOTO_REGULAR, color: backgroundWhite),
                                             ),
                                           ),
                                         ],
@@ -220,24 +223,24 @@ class _SubscriptionScreenViewState extends State<SubscriptionScreenView> {
                                         child: Column(
                                           mainAxisAlignment: MainAxisAlignment.center,
                                           crossAxisAlignment: CrossAxisAlignment.center,
-                                          children: const [
+                                          children: [
                                             Text(
-                                              "PLAN NAME",
-                                              style: TextStyle(
+                                              plans[1]["Name"],
+                                              style: const TextStyle(
                                                 fontSize: 12,
                                                 fontFamily: ROBOTO_MEDIUM,
                                                 color: backgroundWhite,
                                               ),
                                             ),
-                                            SizedBox(height: 5),
+                                            const SizedBox(height: 5),
                                             Text(
-                                              "\$109",
-                                              style: TextStyle(fontSize: 30, fontFamily: ROBOTO_BOLD, color: backgroundWhite),
+                                              "\$${plans[1]["Price"]}",
+                                              style: const TextStyle(fontSize: 30, fontFamily: ROBOTO_BOLD, color: backgroundWhite),
                                             ),
-                                            SizedBox(height: 5),
+                                            const SizedBox(height: 5),
                                             Text(
-                                              "Every 6 Months",
-                                              style: TextStyle(fontSize: 10, fontFamily: ROBOTO_REGULAR, color: backgroundWhite),
+                                              "Every ${plans[1]["Months"]} Months",
+                                              style: const TextStyle(fontSize: 10, fontFamily: ROBOTO_REGULAR, color: backgroundWhite),
                                             ),
                                           ],
                                         ),
@@ -261,10 +264,10 @@ class _SubscriptionScreenViewState extends State<SubscriptionScreenView> {
                                                       margin: const EdgeInsets.only(right: 5),
                                                       decoration: const BoxDecoration(color: backgroundWhite, shape: BoxShape.circle),
                                                     ),
-                                                    const Expanded(
+                                                    Expanded(
                                                       child: Text(
-                                                        "Lorem ipsum is a text",
-                                                        style: TextStyle(fontSize: 10, fontFamily: ROBOTO_REGULAR, color: backgroundWhite),
+                                                        plans[1]["ShortDesp"],
+                                                        style: const TextStyle(fontSize: 10, fontFamily: ROBOTO_REGULAR, color: backgroundWhite),
                                                       ),
                                                     ),
                                                   ],
@@ -280,10 +283,10 @@ class _SubscriptionScreenViewState extends State<SubscriptionScreenView> {
                                                       margin: const EdgeInsets.only(right: 5),
                                                       decoration: const BoxDecoration(color: backgroundWhite, shape: BoxShape.circle),
                                                     ),
-                                                    const Expanded(
+                                                    Expanded(
                                                       child: Text(
-                                                        "Lorem ipsum is a text",
-                                                        style: TextStyle(fontSize: 10, fontFamily: ROBOTO_REGULAR, color: backgroundWhite),
+                                                        plans[1]["ShortDesp"],
+                                                        style: const TextStyle(fontSize: 10, fontFamily: ROBOTO_REGULAR, color: backgroundWhite),
                                                       ),
                                                     ),
                                                   ],
@@ -326,24 +329,24 @@ class _SubscriptionScreenViewState extends State<SubscriptionScreenView> {
                                         child: Column(
                                           mainAxisAlignment: MainAxisAlignment.center,
                                           crossAxisAlignment: CrossAxisAlignment.center,
-                                          children: const [
+                                          children: [
                                             Text(
-                                              "PLAN NAME",
-                                              style: TextStyle(
+                                              plans[2]["Name"],
+                                              style: const TextStyle(
                                                 fontSize: 12,
                                                 fontFamily: ROBOTO_MEDIUM,
                                                 color: backgroundWhite,
                                               ),
                                             ),
-                                            SizedBox(height: 5),
+                                            const SizedBox(height: 5),
                                             Text(
-                                              "\$109",
-                                              style: TextStyle(fontSize: 30, fontFamily: ROBOTO_BOLD, color: backgroundWhite),
+                                              "\$${plans[2]["Price"]}",
+                                              style: const TextStyle(fontSize: 30, fontFamily: ROBOTO_BOLD, color: backgroundWhite),
                                             ),
-                                            SizedBox(height: 5),
+                                            const SizedBox(height: 5),
                                             Text(
-                                              "Every Year",
-                                              style: TextStyle(fontSize: 10, fontFamily: ROBOTO_REGULAR, color: backgroundWhite),
+                                              "Every ${plans[2]["Months"]} Months",
+                                              style: const TextStyle(fontSize: 10, fontFamily: ROBOTO_REGULAR, color: backgroundWhite),
                                             ),
                                           ],
                                         ),
@@ -367,10 +370,10 @@ class _SubscriptionScreenViewState extends State<SubscriptionScreenView> {
                                                       margin: const EdgeInsets.only(right: 5),
                                                       decoration: const BoxDecoration(color: backgroundWhite, shape: BoxShape.circle),
                                                     ),
-                                                    const Expanded(
+                                                    Expanded(
                                                       child: Text(
-                                                        "Lorem ipsum is a text",
-                                                        style: TextStyle(fontSize: 10, fontFamily: ROBOTO_REGULAR, color: backgroundWhite),
+                                                        plans[2]["ShortDesp"],
+                                                        style: const TextStyle(fontSize: 10, fontFamily: ROBOTO_REGULAR, color: backgroundWhite),
                                                       ),
                                                     ),
                                                   ],
@@ -386,10 +389,10 @@ class _SubscriptionScreenViewState extends State<SubscriptionScreenView> {
                                                       margin: const EdgeInsets.only(right: 5),
                                                       decoration: const BoxDecoration(color: backgroundWhite, shape: BoxShape.circle),
                                                     ),
-                                                    const Expanded(
+                                                    Expanded(
                                                       child: Text(
-                                                        "Lorem ipsum is a text",
-                                                        style: TextStyle(fontSize: 10, fontFamily: ROBOTO_REGULAR, color: backgroundWhite),
+                                                        plans[2]["ShortDesp"],
+                                                        style: const TextStyle(fontSize: 10, fontFamily: ROBOTO_REGULAR, color: backgroundWhite),
                                                       ),
                                                     ),
                                                   ],

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:sarvam/screens/resetPasswordScreen/reset_password_screen_controller.dart';
 import 'package:sarvam/utils/const_colors_key.dart';
 import 'package:sarvam/utils/const_fonts_key.dart';
 import 'package:sarvam/utils/const_image_key.dart';
@@ -19,11 +20,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
   final args = Get.arguments;
   TextEditingController otp = TextEditingController();
   TextEditingController password = TextEditingController();
-
-  @override
-  void initState() {
-    super.initState();
-  }
+  ResetPasswordScreenController resetPasswordScreenController = Get.put(ResetPasswordScreenController());
 
   @override
   Widget build(BuildContext context) {
@@ -114,7 +111,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                                 } else if (password.text.toString().isEmpty) {
                                   Get.snackbar("Oops!", "Password required!", icon: const Icon(Icons.error, color: Colors.red), duration: const Duration(seconds: 1), colorText: Colors.white, snackPosition: SnackPosition.TOP, backgroundColor: backgroundCyan);
                                 } else {
-
+                                  resetPasswordScreenController.resetPassword(args[0], args[1], otp.text.trim().toString(), password.text.trim().toString());
                                 }
                               },
                             ),
