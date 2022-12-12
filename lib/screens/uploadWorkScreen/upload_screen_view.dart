@@ -274,7 +274,14 @@ class _UploadScreenViewState extends State<UploadScreenView> {
                                 } else if (selectedFile == null) {
                                   Get.snackbar("Oops!", "Please select the file to upload", icon: const Icon(Icons.error, color: Colors.red), duration: const Duration(seconds: 1), colorText: Colors.white, snackPosition: SnackPosition.TOP, backgroundColor: backgroundCyan);
                                 } else {
-                                  uploadScreenController.uploadMedia(contentID: arguments["contentID"], workName: workName.text.toString(), workDescription: workDescription.text.toString(), mediaFile: selectedFile!);
+                                  var result = await uploadScreenController.uploadMedia(contentID: arguments["contentID"], workName: workName.text.toString(), workDescription: workDescription.text.toString(), mediaFile: selectedFile!);
+                                  if (result) {
+                                    setState(() {
+                                      selectedFile = null;
+                                      workName.clear();
+                                      workDescription.clear();
+                                    });
+                                  }
                                 }
                               },
                             ),

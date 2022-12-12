@@ -24,6 +24,7 @@ class MembershipScreenController extends GetxController {
     }
     var data = jsonDecode(response.body);
     if (response.statusCode == 200 && data["Success"] == true) {
+      await storage.write(ACTIVE_PLAN, true);
       return true;
     } else {
       Get.snackbar("Oops!", "Purchase failed, please try again later.", icon: const Icon(Icons.error, color: Colors.red), duration: const Duration(seconds: 1), colorText: Colors.white, snackPosition: SnackPosition.TOP, backgroundColor: backgroundCyan);

@@ -27,6 +27,7 @@ class LoginScreenController extends GetxController {
     var data = jsonDecode(response.body);
     if (response.statusCode == 200 && data["Success"] == true) {
       await storage.write(USER_ID, data["UserID"]);
+      await storage.write(ACTIVE_PLAN, data["HasActivePlan"]);
       await storage.write(LOGIN_TRUE, true);
       Get.toNamed(Routes.HOME_SCREEN);
     } else {

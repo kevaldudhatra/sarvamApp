@@ -101,6 +101,7 @@ class HomeNavigation extends StatefulWidget {
 }
 
 class _HomeNavigationState extends State<HomeNavigation> {
+  final storage = GetStorage();
   @override
   Widget build(BuildContext context) {
     return Navigator(
@@ -125,7 +126,7 @@ class _HomeNavigationState extends State<HomeNavigation> {
               case Routes.UPLOAD_WORK_SCREEN:
                 return const UploadScreenView();
             }
-            return const SubscriptionScreenView();
+            return storage.hasData(ACTIVE_PLAN) && storage.read(ACTIVE_PLAN) == true ?  CategoryScreenView() : SubscriptionScreenView();
           },
         );
       },
