@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:sarvam/routes/app_pages.dart';
 import 'package:sarvam/screens/forgotPasswordScreen/forgot_screen_controller.dart';
 import 'package:sarvam/utils/const_colors_key.dart';
 import 'package:sarvam/utils/const_fonts_key.dart';

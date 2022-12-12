@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:sarvam/routes/app_pages.dart';
+import 'package:get/get.dart';
+import 'package:sarvam/screens/dailyRoutineScreen/daily_routine_screen_view.dart';
 import 'package:sarvam/utils/const_colors_key.dart';
 import 'package:sarvam/utils/const_fonts_key.dart';
 import 'package:sarvam/utils/const_image_key.dart';
+import 'package:sarvam/screens/categoryScreen/category_screen_controller.dart';
+import 'package:sarvam/widgets/loading_view.dart';
 
 class CategoryScreenView extends StatefulWidget {
   const CategoryScreenView({Key? key}) : super(key: key);
@@ -12,6 +15,14 @@ class CategoryScreenView extends StatefulWidget {
 }
 
 class _CategoryScreenViewState extends State<CategoryScreenView> {
+  CategoryScreenController categoryScreenController = CategoryScreenController();
+
+  @override
+  void initState() {
+    categoryScreenController.getMainCategories();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
@@ -66,89 +77,107 @@ class _CategoryScreenViewState extends State<CategoryScreenView> {
                 SizedBox(
                   width: width,
                   height: height - 175,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  child: Obx(() {
+                    if (categoryScreenController.loading.value) {
+                      return LoadingDialog();
+                    } else {
+                      return Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          GestureDetector(
-                            onTap: () {
-                              Navigator.pushNamed(context, Routes.DAILY_ROUTINE_SCREEN, arguments: {'categoryName': 'Daily Routine'});
-                            },
-                            child: Stack(
-                              alignment: Alignment.center,
-                              children: [
-                                Image.asset(AppImages().categoryIcon_1, width: width / 2 - 25),
-                                const Text(
-                                  "Daily\nRoutine",
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(fontFamily: ROBOTO_BOLD, fontSize: 25, color: backgroundWhite),
-                                )
-                              ],
-                            ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              GestureDetector(
+                                onTap: () {
+                                  Navigator.push(context, MaterialPageRoute(builder: (_) => DailyRoutineScreenView(categoryData: categoryScreenController.categoryList[0])));
+                                },
+                                child: SizedBox(
+                                  width: width / 2 - 25,
+                                  child: Stack(
+                                    alignment: Alignment.center,
+                                    children: [
+                                      Image.asset(AppImages().categoryIcon_1, fit: BoxFit.fitWidth),
+                                      Text(
+                                        categoryScreenController.categoryList[0]["Name"],
+                                        textAlign: TextAlign.center,
+                                        style: const TextStyle(fontFamily: ROBOTO_BOLD, fontSize: 25, color: backgroundWhite),
+                                      )
+                                    ],
+                                  ),
+                                ),
+                              ),
+                              GestureDetector(
+                                onTap: () {
+                                  Navigator.push(context, MaterialPageRoute(builder: (_) => DailyRoutineScreenView(categoryData: categoryScreenController.categoryList[1])));
+                                },
+                                child: SizedBox(
+                                  width: width / 2 - 25,
+                                  child: Stack(
+                                    alignment: Alignment.center,
+                                    children: [
+                                      Image.asset(AppImages().categoryIcon_2, fit: BoxFit.fitWidth),
+                                      Text(
+                                        categoryScreenController.categoryList[1]["Name"],
+                                        textAlign: TextAlign.center,
+                                        style: const TextStyle(fontFamily: ROBOTO_BOLD, fontSize: 25, color: backgroundWhite),
+                                      )
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ],
                           ),
-                          GestureDetector(
-                            onTap: () {
-                              Navigator.pushNamed(context, Routes.DAILY_ROUTINE_SCREEN,arguments: {'categoryName': 'Skill Creative'});
-                            },
-                            child: Stack(
-                              alignment: Alignment.center,
-                              children: [
-                                Image.asset(AppImages().categoryIcon_2, width: width / 2 - 25),
-                                const Text(
-                                  "Skill\nCreative",
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(fontFamily: ROBOTO_BOLD, fontSize: 25, color: backgroundWhite),
-                                )
-                              ],
-                            ),
+                          const SizedBox(height: 10),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              GestureDetector(
+                                onTap: () {
+                                  Navigator.push(context, MaterialPageRoute(builder: (_) => DailyRoutineScreenView(categoryData: categoryScreenController.categoryList[2])));
+                                },
+                                child: SizedBox(
+                                  width: width / 2 - 25,
+                                  child: Stack(
+                                    alignment: Alignment.center,
+                                    children: [
+                                      Image.asset(AppImages().categoryIcon_3, fit: BoxFit.fitWidth),
+                                      Text(
+                                        categoryScreenController.categoryList[2]["Name"],
+                                        textAlign: TextAlign.center,
+                                        style: const TextStyle(fontFamily: ROBOTO_BOLD, fontSize: 25, color: backgroundWhite),
+                                      )
+                                    ],
+                                  ),
+                                ),
+                              ),
+                              GestureDetector(
+                                onTap: () {
+                                  Navigator.push(context, MaterialPageRoute(builder: (_) => DailyRoutineScreenView(categoryData: categoryScreenController.categoryList[3])));
+                                },
+                                child: SizedBox(
+                                  width: width / 2 - 25,
+                                  child: Stack(
+                                    alignment: Alignment.center,
+                                    children: [
+                                      Image.asset(AppImages().categoryIcon_4, fit: BoxFit.fitWidth),
+                                      Text(
+                                        categoryScreenController.categoryList[3]["Name"],
+                                        textAlign: TextAlign.center,
+                                        style: const TextStyle(fontFamily: ROBOTO_BOLD, fontSize: 25, color: backgroundWhite),
+                                      )
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ],
                           ),
                         ],
-                      ),
-                      const SizedBox(height: 10),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          GestureDetector(
-                            onTap: () {
-                              Navigator.pushNamed(context, Routes.DAILY_ROUTINE_SCREEN,arguments: {'categoryName': 'Knowledge Skill'});
-                            },
-                            child: Stack(
-                              alignment: Alignment.center,
-                              children: [
-                                Image.asset(AppImages().categoryIcon_3, width: width / 2 - 25),
-                                const Text(
-                                  "Knowledge\nSkill",
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(fontFamily: ROBOTO_BOLD, fontSize: 25, color: backgroundWhite),
-                                )
-                              ],
-                            ),
-                          ),
-                          GestureDetector(
-                            onTap: () {
-                              Navigator.pushNamed(context, Routes.DAILY_ROUTINE_SCREEN,arguments: {'categoryName': 'Real Life Skill'});
-                            },
-                            child: Stack(
-                              alignment: Alignment.center,
-                              children: [
-                                Image.asset(AppImages().categoryIcon_4, width: width / 2 - 25),
-                                const Text(
-                                  "Real\nLife Skill",
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(fontFamily: ROBOTO_BOLD, fontSize: 25, color: backgroundWhite),
-                                )
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
+                      );
+                    }
+                  }),
                 )
               ],
             ),

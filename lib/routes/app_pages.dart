@@ -117,11 +117,11 @@ class _HomeNavigationState extends State<HomeNavigation> {
               case Routes.CATEGORY_SCREEN:
                 return const CategoryScreenView();
               case Routes.DAILY_ROUTINE_SCREEN:
-                return const DailyRoutineScreenView();
+                return DailyRoutineScreenView(categoryData: null);
               case Routes.PRAYER_SCREEN:
-                return const PrayerScreenView();
+                return PrayerScreenView(subCategoryData: null);
               case Routes.PRAYER_DETAIL_SCREEN:
-                return const PrayerDetailScreenView();
+                return PrayerDetailScreenView(contentData: null);
               case Routes.UPLOAD_WORK_SCREEN:
                 return const UploadScreenView();
             }
@@ -154,11 +154,11 @@ class _CategoryNavigationState extends State<CategoryNavigation> {
               case Routes.CATEGORY_SCREEN:
                 return const CategoryScreenView();
               case Routes.DAILY_ROUTINE_SCREEN:
-                return const DailyRoutineScreenView();
+                return DailyRoutineScreenView(categoryData: null);
               case Routes.PRAYER_SCREEN:
-                return const PrayerScreenView();
+                return PrayerScreenView(subCategoryData: null);
               case Routes.PRAYER_DETAIL_SCREEN:
-                return const PrayerDetailScreenView();
+                return PrayerDetailScreenView(contentData: null);
               case Routes.UPLOAD_WORK_SCREEN:
                 return const UploadScreenView();
             }

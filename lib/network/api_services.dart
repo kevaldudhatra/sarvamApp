@@ -8,4 +8,9 @@ class ApiServices {
   static String ForgotPassword = '$baseUrl/ForgotPass';
   static String ResetPassword = '$baseUrl/ResetPass';
   static String GetPlans = '$baseUrl/Plans';
+  static String PurchasePlan = '$baseUrl/PurchasePlan';
+  static String GetCategories = '$baseUrl/HomeDate';
+  static String GetSubCategories = '$baseUrl/SubCat';
+  static String GetContent = '$baseUrl/Content';
+  static String GetContentDetails = '$baseUrl/ContentDetails';
 }

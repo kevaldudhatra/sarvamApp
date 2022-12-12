@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:sarvam/routes/app_pages.dart';
+import 'package:sarvam/screens/membershipScreen/membership_screen_controller.dart';
 import 'package:sarvam/utils/const_colors_key.dart';
 import 'package:sarvam/utils/const_fonts_key.dart';
 import 'package:sarvam/utils/const_image_key.dart';
@@ -12,15 +14,13 @@ class MembershipScreenView extends StatefulWidget {
 }
 
 class _MembershipScreenViewState extends State<MembershipScreenView> {
-  @override
-  void initState() {
-    super.initState();
-  }
+  MembershipScreenController membershipScreenController = Get.put(MembershipScreenController());
 
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
+    final arguments = ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
     return Scaffold(
       backgroundColor: backgroundCyan,
       body: Stack(
@@ -68,135 +68,81 @@ class _MembershipScreenViewState extends State<MembershipScreenView> {
                   ),
                 ),
                 Container(
-                  margin: const EdgeInsets.only(top: 50),
-                  padding: const EdgeInsets.all(20),
                   height: height * 0.45,
-                  decoration: const BoxDecoration(
-                    color: lightCyanBackground,
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(15),
-                    ),
-                  ),
+                  margin: const EdgeInsets.only(top: 50),
                   child: SingleChildScrollView(
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const Text(
-                          "PLAN NAME",
-                          style: TextStyle(
-                            fontSize: 15,
-                            fontFamily: ROBOTO_BOLD,
-                            color: backgroundCyan,
-                          ),
+                    child: Container(
+                      padding: const EdgeInsets.all(20),
+                      decoration: const BoxDecoration(
+                        color: lightCyanBackground,
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(15),
                         ),
-                        const SizedBox(height: 5),
-                        const Text(
-                          "\$109",
-                          style: TextStyle(fontSize: 30, fontFamily: ROBOTO_BOLD, color: backgroundCyan),
-                        ),
-                        const SizedBox(height: 5),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisSize: MainAxisSize.max,
-                          children: [
-                            Container(
-                              height: 5,
-                              width: 5,
-                              margin: const EdgeInsets.only(top: 5, right: 10),
-                              decoration: const BoxDecoration(color: textBlack, shape: BoxShape.circle),
-                            ),
-                            const Expanded(
-                              child: Text(
-                                "Lorem ipsum is a placeholder text commonly used to demonstrate the visual.",
-                                textAlign: TextAlign.start,
-                                style: TextStyle(fontFamily: ROBOTO_REGULAR, color: textBlack),
-                              ),
-                            ),
-                          ],
-                        ),
-                        const SizedBox(height: 5),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisSize: MainAxisSize.max,
-                          children: [
-                            Container(
-                              height: 5,
-                              width: 5,
-                              margin: const EdgeInsets.only(top: 5, right: 10),
-                              decoration: const BoxDecoration(color: textBlack, shape: BoxShape.circle),
-                            ),
-                            const Expanded(
-                              child: Text(
-                                "Lorem ipsum is a placeholder text commonly used to demonstrate the visual.",
-                                textAlign: TextAlign.start,
-                                style: TextStyle(fontFamily: ROBOTO_REGULAR, color: textBlack),
-                              ),
-                            ),
-                          ],
-                        ),
-                        const SizedBox(height: 5),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisSize: MainAxisSize.max,
-                          children: [
-                            Container(
-                              height: 5,
-                              width: 5,
-                              margin: const EdgeInsets.only(top: 5, right: 10),
-                              decoration: const BoxDecoration(color: textBlack, shape: BoxShape.circle),
-                            ),
-                            const Expanded(
-                              child: Text(
-                                "Lorem ipsum is a placeholder text commonly used to demonstrate the visual.",
-                                textAlign: TextAlign.start,
-                                style: TextStyle(fontFamily: ROBOTO_REGULAR, color: textBlack),
-                              ),
-                            ),
-                          ],
-                        ),
-                        const SizedBox(height: 5),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisSize: MainAxisSize.max,
-                          children: [
-                            Container(
-                              height: 5,
-                              width: 5,
-                              margin: const EdgeInsets.only(top: 5, right: 10),
-                              decoration: const BoxDecoration(color: textBlack, shape: BoxShape.circle),
-                            ),
-                            const Expanded(
-                              child: Text(
-                                "Lorem ipsum is a placeholder text commonly used to demonstrate the visual.",
-                                textAlign: TextAlign.start,
-                                style: TextStyle(fontFamily: ROBOTO_REGULAR, color: textBlack),
-                              ),
-                            ),
-                          ],
-                        ),
-                        const SizedBox(height: 15),
-                        GestureDetector(
-                          onTap: () {
-                            Navigator.pushNamed(context, Routes.CATEGORY_SCREEN);
-                          },
-                          child: Container(
-                            width: width * 0.40,
-                            alignment: Alignment.center,
-                            height: 35,
-                            decoration: const BoxDecoration(color: backgroundCyan, borderRadius: BorderRadius.all(Radius.circular(8))),
-                            child: const Text(
-                              "Purchase",
-                              style: TextStyle(fontSize: 15, fontFamily: ROBOTO_MEDIUM, color: backgroundWhite),
+                      ),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            arguments["detailPlanData"]["Name"],
+                            style: const TextStyle(
+                              fontSize: 15,
+                              fontFamily: ROBOTO_BOLD,
+                              color: backgroundCyan,
                             ),
                           ),
-                        )
-                      ],
+                          const SizedBox(height: 5),
+                          Text(
+                            "\$${arguments["detailPlanData"]["Price"]}",
+                            style: const TextStyle(fontSize: 30, fontFamily: ROBOTO_BOLD, color: backgroundCyan),
+                          ),
+                          const SizedBox(height: 5),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisSize: MainAxisSize.max,
+                            children: [
+                              Container(
+                                height: 5,
+                                width: 5,
+                                margin: const EdgeInsets.only(top: 5, right: 10),
+                                decoration: const BoxDecoration(color: textBlack, shape: BoxShape.circle),
+                              ),
+                              Expanded(
+                                child: Text(
+                                  arguments["detailPlanData"]["LongDesp"],
+                                  textAlign: TextAlign.start,
+                                  style: const TextStyle(fontFamily: ROBOTO_REGULAR, color: textBlack),
+                                ),
+                              ),
+                            ],
+                          ),
+                          const SizedBox(height: 15),
+                          GestureDetector(
+                            onTap: () {
+                              membershipScreenController.purchasePlan(arguments["detailPlanData"]["PlanID"]).then(
+                                    (value) => {
+                                      if (value)
+                                        {
+                                          Navigator.pushNamed(context, Routes.CATEGORY_SCREEN),
+                                        },
+                                    },
+                                  );
+                            },
+                            child: Container(
+                              width: width * 0.40,
+                              alignment: Alignment.center,
+                              height: 35,
+                              decoration: const BoxDecoration(color: backgroundCyan, borderRadius: BorderRadius.all(Radius.circular(8))),
+                              child: const Text(
+                                "Purchase",
+                                style: TextStyle(fontSize: 15, fontFamily: ROBOTO_MEDIUM, color: backgroundWhite),
+                              ),
+                            ),
+                          )
+                        ],
+                      ),
                     ),
                   ),
                 )

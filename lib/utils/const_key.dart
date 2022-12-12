@@ -1,7 +1,8 @@
-// ignore_for_file: constant_identifier_names
+// ignore_for_file: constant_identifier_names, non_constant_identifier_names
+import 'dart:io' show Platform;
 
-const LOGIN_TRUE = "loginTrue";
-const AUTHORIZATION_TOKEN = "authorizationToken";
-const USER_ID = "userId";
-const API_KEY = "je0gdkzluysarshj1wy7";
-const PLATFORM = "Android";
+const String LOGIN_TRUE = "loginTrue";
+const String AUTHORIZATION_TOKEN = "authorizationToken";
+const String USER_ID = "userId";
+final String API_KEY = Platform.isAndroid ? "je0gdkzluysarshj1wy7" : "umg8y1s2ctl40rir6n8o";
+final String PLATFORM = Platform.isAndroid ? "Android" : "IOS";

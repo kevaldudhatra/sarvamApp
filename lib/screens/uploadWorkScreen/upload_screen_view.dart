@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:file_picker/file_picker.dart';
+import 'package:sarvam/screens/uploadWorkScreen/upload_screen_controller.dart';
 import 'package:sarvam/utils/const_colors_key.dart';
 import 'package:sarvam/utils/const_image_key.dart';
 import 'package:sarvam/utils/const_fonts_key.dart';
@@ -13,12 +16,27 @@ class UploadScreenView extends StatefulWidget {
 }
 
 class _UploadScreenViewState extends State<UploadScreenView> {
+  TextEditingController workName = TextEditingController();
+  TextEditingController workDescription = TextEditingController();
+  UploadScreenController uploadScreenController = UploadScreenController();
+  PlatformFile? selectedFile;
+
+  void pickFile() async {
+    FilePickerResult? result = await FilePicker.platform.pickFiles();
+    setState(() {
+      if (result != null) {
+        selectedFile = result.files.first;
+      } else {
+        selectedFile = null;
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
-    TextEditingController workName = TextEditingController();
-    TextEditingController workDescription = TextEditingController();
+    final arguments = ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
     return Scaffold(
       backgroundColor: backgroundWhite,
       body: Stack(
@@ -134,7 +152,7 @@ class _UploadScreenViewState extends State<UploadScreenView> {
                           child: CustomTextField(
                             textEditingController: workDescription,
                             keyboardType: TextInputType.text,
-                            textInputAction: TextInputAction.next,
+                            textInputAction: TextInputAction.done,
                             hint: "Enter description...",
                             fontSize: 15,
                           ),
@@ -158,63 +176,85 @@ class _UploadScreenViewState extends State<UploadScreenView> {
                               ),
                             ],
                           ),
-                          child: Column(
-                            mainAxisSize: MainAxisSize.min,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Image.asset(AppImages().uploadFileIcon, width: 70, height: 70),
-                              const Text(
-                                "Upload Work",
-                                style: TextStyle(color: textBlack, fontSize: 15, fontFamily: ROBOTO_BOLD),
-                              ),
-                              const SizedBox(height: 5),
-                              Text(
-                                "Max. File size : 200mb",
-                                style: TextStyle(color: textBlack.withOpacity(0.5), fontSize: 15, fontFamily: ROBOTO_BOLD),
-                              ),
-                            ],
+                          child: InkWell(
+                            onTap: () {
+                              pickFile();
+                            },
+                            child: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Image.asset(AppImages().uploadFileIcon, width: 70, height: 70),
+                                const Text(
+                                  "Upload Work",
+                                  style: TextStyle(color: textBlack, fontSize: 15, fontFamily: ROBOTO_BOLD),
+                                ),
+                                const SizedBox(height: 5),
+                                Text(
+                                  "Max. File size : 200mb",
+                                  style: TextStyle(color: textBlack.withOpacity(0.5), fontSize: 15, fontFamily: ROBOTO_BOLD),
+                                ),
+                              ],
+                            ),
                           ),
                         ),
                         const SizedBox(height: 15),
-                        Container(
-                          width: width,
-                          padding: const EdgeInsets.symmetric(horizontal: 10),
-                          decoration: const BoxDecoration(
-                            color: backgroundWhite,
-                            borderRadius: BorderRadius.all(Radius.circular(10)),
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.black12, //New
-                                blurRadius: 10,
-                              ),
-                            ],
-                          ),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Image.asset(AppImages().dummyFileIcon, height: 55, width: 55, fit: BoxFit.fill),
-                              Column(
-                                mainAxisSize: MainAxisSize.min,
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  const Text(
-                                    "Photos001.pdf",
-                                    style: TextStyle(color: textBlack, fontSize: 12, fontFamily: ROBOTO_BOLD),
-                                  ),
-                                  Text(
-                                    "15mb",
-                                    style: TextStyle(color: textBlack.withOpacity(0.5), fontSize: 10, fontFamily: ROBOTO_BOLD),
-                                  ),
-                                ],
-                              ),
-                              const Spacer(),
-                              Image.asset(AppImages().closeIcon, height: 30, width: 30),
-                            ],
-                          ),
-                        ),
+                        selectedFile != null
+                            ? Container(
+                                width: width,
+                                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                                decoration: const BoxDecoration(
+                                  color: backgroundWhite,
+                                  borderRadius: BorderRadius.all(Radius.circular(10)),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.black12, //New
+                                      blurRadius: 10,
+                                    ),
+                                  ],
+                                ),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    Row(
+                                      children: [
+                                        Image.asset(AppImages().dummyFileIcon, height: 40, width: 40, fit: BoxFit.fill),
+                                        SizedBox(
+                                          width: width - 135,
+                                          child: Column(
+                                            mainAxisSize: MainAxisSize.min,
+                                            mainAxisAlignment: MainAxisAlignment.center,
+                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                            children: [
+                                              Text(
+                                                selectedFile!.name,
+                                                maxLines: 2,
+                                                overflow: TextOverflow.ellipsis,
+                                                style: const TextStyle(color: textBlack, fontSize: 13, fontFamily: ROBOTO_BOLD),
+                                              ),
+                                              Text(
+                                                "${((selectedFile!.size / 1024.0) / 1024.0).toStringAsFixed(2)} MB",
+                                                maxLines: 1,
+                                                style: TextStyle(color: textBlack.withOpacity(0.5), fontSize: 10, fontFamily: ROBOTO_BOLD),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    InkWell(
+                                        onTap: () {
+                                          setState(() {
+                                            selectedFile = null;
+                                          });
+                                        },
+                                        child: Image.asset(AppImages().closeIcon, height: 25, width: 25)),
+                                  ],
+                                ),
+                              )
+                            : Container(),
                         Center(
                           child: Container(
                             alignment: Alignment.center,
@@ -226,7 +266,17 @@ class _UploadScreenViewState extends State<UploadScreenView> {
                               labelColor: backgroundWhite,
                               borderColor: Colors.transparent,
                               buttonColor: backgroundCyan,
-                              onTap: () {},
+                              onTap: () async {
+                                if (workName.text.toString().isEmpty) {
+                                  Get.snackbar("Oops!", "Work Name required!", icon: const Icon(Icons.error, color: Colors.red), duration: const Duration(seconds: 1), colorText: Colors.white, snackPosition: SnackPosition.TOP, backgroundColor: backgroundCyan);
+                                } else if (workDescription.text.toString().isEmpty) {
+                                  Get.snackbar("Oops!", "Work Description required!", icon: const Icon(Icons.error, color: Colors.red), duration: const Duration(seconds: 1), colorText: Colors.white, snackPosition: SnackPosition.TOP, backgroundColor: backgroundCyan);
+                                } else if (selectedFile == null) {
+                                  Get.snackbar("Oops!", "Please select the file to upload", icon: const Icon(Icons.error, color: Colors.red), duration: const Duration(seconds: 1), colorText: Colors.white, snackPosition: SnackPosition.TOP, backgroundColor: backgroundCyan);
+                                } else {
+                                  uploadScreenController.uploadMedia(contentID: arguments["contentID"], workName: workName.text.toString(), workDescription: workDescription.text.toString(), mediaFile: selectedFile!);
+                                }
+                              },
                             ),
                           ),
                         ),
