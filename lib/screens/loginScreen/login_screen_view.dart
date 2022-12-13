@@ -20,8 +20,9 @@ class _LoginScreenState extends State<LoginScreen> {
   bool obscuredText = true;
   bool isChecked = false;
   final storage = GetStorage();
-  TextEditingController email = TextEditingController(text: "");
-  TextEditingController password = TextEditingController(text: "");
+  TextEditingController email = TextEditingController();
+  TextEditingController password = TextEditingController();
+  RegExp isValidEmail = RegExp(r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$');
   LoginScreenController loginScreenController = Get.put(LoginScreenController());
 
   void passwordHideShow() {
@@ -154,8 +155,10 @@ class _LoginScreenState extends State<LoginScreen> {
                               onTap: () async {
                                 if (email.text.toString().isEmpty) {
                                   Get.snackbar("Oops!", "Email required!", icon: const Icon(Icons.error, color: Colors.red), duration: const Duration(seconds: 1), colorText: Colors.white, snackPosition: SnackPosition.TOP, backgroundColor: backgroundCyan);
-                                } else if (password.text.toString().isEmpty) {
-                                  Get.snackbar("Oops!", "Password required!", icon: const Icon(Icons.error, color: Colors.red), duration: const Duration(seconds: 1), colorText: Colors.white, snackPosition: SnackPosition.TOP, backgroundColor: backgroundCyan);
+                                } else if (!isValidEmail.hasMatch(email.text.toString())) {
+                                  Get.snackbar("Oops!", "Enter valid email address!", icon: const Icon(Icons.error, color: Colors.red), duration: const Duration(seconds: 1), colorText: Colors.white, snackPosition: SnackPosition.TOP, backgroundColor: backgroundCyan);
+                                } else if (password.text.toString().isEmpty || password.text.length < 6) {
+                                  Get.snackbar("Oops!", "You have to enter at least 6 digit password!", icon: const Icon(Icons.error, color: Colors.red), duration: const Duration(seconds: 1), colorText: Colors.white, snackPosition: SnackPosition.TOP, backgroundColor: backgroundCyan);
                                 } else {
                                   await loginScreenController.logIn(email.text.trim().toString(), password.text.trim().toString());
                                 }

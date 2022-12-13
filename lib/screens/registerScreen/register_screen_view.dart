@@ -20,6 +20,7 @@ class RegisterScreen extends StatefulWidget {
 
 class _RegisterScreenState extends State<RegisterScreen> {
   RegisterScreenController registerScreenController = Get.put(RegisterScreenController());
+  RegExp isValidEmail = RegExp(r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$');
   TextEditingController name = TextEditingController();
   TextEditingController email = TextEditingController();
   TextEditingController password = TextEditingController();
@@ -823,8 +824,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             Get.snackbar("Oops!", "Name required!", icon: const Icon(Icons.error, color: Colors.red), duration: const Duration(seconds: 1), colorText: textBlack, snackPosition: SnackPosition.TOP, backgroundColor: backgroundWhite);
                           } else if (email.text.toString().isEmpty) {
                             Get.snackbar("Oops!", "Email required!", icon: const Icon(Icons.error, color: Colors.red), duration: const Duration(seconds: 1), colorText: textBlack, snackPosition: SnackPosition.TOP, backgroundColor: backgroundWhite);
-                          } else if (password.text.toString().isEmpty) {
-                            Get.snackbar("Oops!", "Password required!", icon: const Icon(Icons.error, color: Colors.red), duration: const Duration(seconds: 1), colorText: textBlack, snackPosition: SnackPosition.TOP, backgroundColor: backgroundWhite);
+                          } else if (!isValidEmail.hasMatch(email.text.toString())) {
+                            Get.snackbar("Oops!", "Enter valid email address!", icon: const Icon(Icons.error, color: Colors.red), duration: const Duration(seconds: 1), colorText: textBlack, snackPosition: SnackPosition.TOP, backgroundColor: backgroundWhite);
+                          } else if (password.text.toString().isEmpty || password.text.length < 6) {
+                            Get.snackbar("Oops!", "You have to enter at least 6 digit password!", icon: const Icon(Icons.error, color: Colors.red), duration: const Duration(seconds: 1), colorText: textBlack, snackPosition: SnackPosition.TOP, backgroundColor: backgroundWhite);
                           } else if (selectedDate == "") {
                             Get.snackbar("Oops!", "Date of Birth required!", icon: const Icon(Icons.error, color: Colors.red), duration: const Duration(seconds: 1), colorText: textBlack, snackPosition: SnackPosition.TOP, backgroundColor: backgroundWhite);
                           } else if (phoneNumber.text.toString().isEmpty) {

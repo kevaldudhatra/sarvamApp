@@ -126,7 +126,7 @@ class _HomeNavigationState extends State<HomeNavigation> {
               case Routes.UPLOAD_WORK_SCREEN:
                 return const UploadScreenView();
             }
-            return storage.hasData(ACTIVE_PLAN) && storage.read(ACTIVE_PLAN) == true ?  CategoryScreenView() : SubscriptionScreenView();
+            return storage.hasData(ACTIVE_PLAN) && storage.read(ACTIVE_PLAN) == true ?  const CategoryScreenView() : const SubscriptionScreenView();
           },
         );
       },

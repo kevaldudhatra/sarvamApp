@@ -17,6 +17,7 @@ class ForgotPasswordScreen extends StatefulWidget {
 class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
   ForgotPasswordScreenController forgotPasswordScreenController = Get.put(ForgotPasswordScreenController());
   TextEditingController email = TextEditingController();
+  RegExp isValidEmail = RegExp(r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$');
 
   @override
   Widget build(BuildContext context) {
@@ -91,6 +92,8 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                               onTap: () {
                                 if (email.text.toString().isEmpty) {
                                   Get.snackbar("Oops!", "Email required!", icon: const Icon(Icons.error, color: Colors.red), duration: const Duration(seconds: 1), colorText: Colors.white, snackPosition: SnackPosition.TOP, backgroundColor: backgroundCyan);
+                                } else if (!isValidEmail.hasMatch(email.text.toString())) {
+                                  Get.snackbar("Oops!", "Enter valid email address!", icon: const Icon(Icons.error, color: Colors.red), duration: const Duration(seconds: 1), colorText: Colors.white, snackPosition: SnackPosition.TOP, backgroundColor: backgroundCyan);
                                 } else {
                                   forgotPasswordScreenController.forgotPassword(email.text.trim().toString());
                                 }

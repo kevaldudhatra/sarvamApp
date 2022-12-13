@@ -108,8 +108,8 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                               onTap: () async {
                                 if (otp.text.toString().isEmpty) {
                                   Get.snackbar("Oops!", "Otp required!", icon: const Icon(Icons.error, color: Colors.red), duration: const Duration(seconds: 1), colorText: Colors.white, snackPosition: SnackPosition.TOP, backgroundColor: backgroundCyan);
-                                } else if (password.text.toString().isEmpty) {
-                                  Get.snackbar("Oops!", "Password required!", icon: const Icon(Icons.error, color: Colors.red), duration: const Duration(seconds: 1), colorText: Colors.white, snackPosition: SnackPosition.TOP, backgroundColor: backgroundCyan);
+                                } else if (password.text.toString().isEmpty || password.text.length < 6) {
+                                  Get.snackbar("Oops!", "You have to enter at least 6 digit password!", icon: const Icon(Icons.error, color: Colors.red), duration: const Duration(seconds: 1), colorText: Colors.white, snackPosition: SnackPosition.TOP, backgroundColor: backgroundCyan);
                                 } else {
                                   resetPasswordScreenController.resetPassword(args[0], args[1], otp.text.trim().toString(), password.text.trim().toString());
                                 }
