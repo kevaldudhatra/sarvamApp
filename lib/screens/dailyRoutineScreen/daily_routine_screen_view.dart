@@ -8,7 +8,6 @@ import 'package:sarvam/utils/const_colors_key.dart';
 import 'package:sarvam/utils/const_image_key.dart';
 import 'package:sarvam/utils/const_fonts_key.dart';
 import 'package:sarvam/widgets/loading_view.dart';
-import 'dart:io' show Platform;
 
 class DailyRoutineScreenView extends StatefulWidget {
   dynamic categoryData;
@@ -43,7 +42,7 @@ class _DailyRoutineScreenViewState extends State<DailyRoutineScreenView> {
             child: Image.asset(AppImages().dailyRoutineBackground, fit: BoxFit.fill),
           ),
           Container(
-            margin: EdgeInsets.only(left: 20, right: 20, top: 50, bottom: Platform.isAndroid ? 75 : 120),
+            margin: EdgeInsets.only(left: 20, right: 20, top: 50),
             child: Column(
               children: [
                 SizedBox(
@@ -97,15 +96,15 @@ class _DailyRoutineScreenViewState extends State<DailyRoutineScreenView> {
                   ),
                 ),
                 Obx(() {
-                  return SizedBox(
+                  return Container(
                     width: width,
-                    height: height - (Platform.isAndroid ? 280 : 325),
+                    height: height - 255,
                     child: dailyRoutineScreenController.loading.value
                         ? LoadingDialog()
                         : dailyRoutineScreenController.subCategoryList.isNotEmpty
                             ? GridView.builder(
                                 shrinkWrap: true,
-                                physics: const ClampingScrollPhysics(),
+                                physics: const BouncingScrollPhysics(),
                                 padding: const EdgeInsets.symmetric(vertical: 25),
                                 itemCount: dailyRoutineScreenController.subCategoryList.length,
                                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisSpacing: 10, mainAxisSpacing: 15, crossAxisCount: 2, childAspectRatio: 2),

@@ -7,7 +7,6 @@ import 'package:sarvam/utils/const_colors_key.dart';
 import 'package:sarvam/utils/const_fonts_key.dart';
 import 'package:sarvam/utils/const_image_key.dart';
 import 'package:sarvam/widgets/loading_view.dart';
-import 'dart:io' show Platform;
 
 class SubscriptionScreenView extends StatefulWidget {
   const SubscriptionScreenView({Key? key}) : super(key: key);
@@ -53,7 +52,7 @@ class _SubscriptionScreenViewState extends State<SubscriptionScreenView> {
               return LoadingDialog();
             } else {
               return Container(
-                margin: EdgeInsets.only(top: 50, left: 20, right: 20, bottom: Platform.isAndroid ? 75 : 120),
+                margin: EdgeInsets.only(top: 50, left: 20, right: 20),
                 height: height,
                 child: Column(
                   children: [
@@ -81,7 +80,7 @@ class _SubscriptionScreenViewState extends State<SubscriptionScreenView> {
                     ),
                     Container(
                       margin: const EdgeInsets.only(top: 20),
-                      height: height * 0.75 - (Platform.isAndroid ? 115 : 160),
+                      height: height * 0.75 - 115,
                       width: width,
                       child: SingleChildScrollView(
                         physics: const BouncingScrollPhysics(),

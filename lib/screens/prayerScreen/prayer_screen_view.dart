@@ -8,7 +8,6 @@ import 'package:sarvam/utils/const_colors_key.dart';
 import 'package:sarvam/utils/const_image_key.dart';
 import 'package:sarvam/utils/const_fonts_key.dart';
 import 'package:sarvam/widgets/loading_view.dart';
-import 'dart:io' show Platform;
 
 class PrayerScreenView extends StatefulWidget {
   dynamic subCategoryData;
@@ -48,7 +47,7 @@ class _PrayerScreenViewState extends State<PrayerScreenView> {
             child: Image.asset(AppImages().dailyRoutineBackground, fit: BoxFit.fill),
           ),
           Container(
-            margin: EdgeInsets.only(left: 20, right: 20, top: 50, bottom: Platform.isAndroid ? 75 : 120),
+            margin: EdgeInsets.only(left: 20, right: 20, top: 50),
             child: Column(
               children: [
                 SizedBox(
@@ -182,15 +181,15 @@ class _PrayerScreenViewState extends State<PrayerScreenView> {
                   ),
                 ),
                 Obx(() {
-                  return SizedBox(
+                  return Container(
                     width: width,
-                    height: height - (Platform.isAndroid ? 350 : 395),
+                    height: height - 320,
                     child: prayerScreenController.loading.value
                         ? LoadingDialog()
                         : prayerScreenController.contentList.isNotEmpty
                             ? GridView.builder(
                                 shrinkWrap: true,
-                                physics: const ClampingScrollPhysics(),
+                                physics: const BouncingScrollPhysics(),
                                 padding: EdgeInsets.zero,
                                 itemCount: prayerScreenController.contentList.length,
                                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisSpacing: 10, mainAxisSpacing: 15, crossAxisCount: 2, childAspectRatio: 2),

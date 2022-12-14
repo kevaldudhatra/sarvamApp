@@ -10,7 +10,6 @@ import 'package:sarvam/utils/const_fonts_key.dart';
 import 'package:sarvam/widgets/loading_view.dart';
 import 'package:chewie/chewie.dart';
 import 'package:video_player/video_player.dart';
-import 'dart:io' show Platform;
 
 class PrayerDetailScreenView extends StatefulWidget {
   dynamic contentData;
@@ -131,6 +130,8 @@ class _PrayerDetailScreenViewState extends State<PrayerDetailScreenView> {
                                         autoPlay: autoplay,
                                         looping: looping,
                                         aspectRatio: 2,
+                                        // showControls: false,
+                                        // showOptions: false,
                                         materialProgressColors: ChewieProgressColors(
                                           playedColor: backgroundCyan,
                                           handleColor: backgroundWhite,
@@ -168,7 +169,7 @@ class _PrayerDetailScreenViewState extends State<PrayerDetailScreenView> {
                               Container(
                                 width: width,
                                 margin: const EdgeInsets.only(top: 10),
-                                padding: EdgeInsets.only(left: 20, right: 20, top: 20, bottom: Platform.isAndroid ? 95 : 140),
+                                padding: EdgeInsets.only(left: 20, right: 20, top: 20, bottom: 95),
                                 decoration: const BoxDecoration(color: backgroundWhite, borderRadius: BorderRadius.only(topRight: Radius.circular(25), topLeft: Radius.circular(25))),
                                 child: Column(
                                   children: [

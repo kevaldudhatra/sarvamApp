@@ -7,7 +7,6 @@ import 'package:sarvam/utils/const_image_key.dart';
 import 'package:sarvam/utils/const_fonts_key.dart';
 import 'package:sarvam/widgets/custom_button.dart';
 import 'package:sarvam/widgets/custom_text_field.dart';
-import 'dart:io' show Platform;
 
 class UploadScreenView extends StatefulWidget {
   const UploadScreenView({Key? key}) : super(key: key);
@@ -102,7 +101,7 @@ class _UploadScreenViewState extends State<UploadScreenView> {
                 ),
                 Container(
                   height: height - 180,
-                  padding: EdgeInsets.only(left: 20, right: 20, top: 30, bottom: Platform.isAndroid ? 100 : 145),
+                  padding: EdgeInsets.only(left: 20, right: 20, top: 30, bottom: 100),
                   child: SingleChildScrollView(
                     physics: const BouncingScrollPhysics(),
                     child: Column(

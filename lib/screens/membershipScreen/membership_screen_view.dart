@@ -5,7 +5,6 @@ import 'package:sarvam/screens/membershipScreen/membership_screen_controller.dar
 import 'package:sarvam/utils/const_colors_key.dart';
 import 'package:sarvam/utils/const_fonts_key.dart';
 import 'package:sarvam/utils/const_image_key.dart';
-import 'dart:io' show Platform;
 
 class MembershipScreenView extends StatefulWidget {
   const MembershipScreenView({Key? key}) : super(key: key);
@@ -42,7 +41,7 @@ class _MembershipScreenViewState extends State<MembershipScreenView> {
             child: Image.asset(AppImages().subscriptionBackground2, fit: BoxFit.fill),
           ),
           Container(
-            margin: EdgeInsets.only(top: 50, left: 20, right: 20, bottom: Platform.isAndroid ? 75 : 120),
+            margin: EdgeInsets.only(top: 50, left: 20, right: 20),
             height: height,
             child: Column(
               children: [
