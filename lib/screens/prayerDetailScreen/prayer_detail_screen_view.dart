@@ -8,6 +8,9 @@ import 'package:sarvam/utils/const_colors_key.dart';
 import 'package:sarvam/utils/const_image_key.dart';
 import 'package:sarvam/utils/const_fonts_key.dart';
 import 'package:sarvam/widgets/loading_view.dart';
+import 'package:chewie/chewie.dart';
+import 'package:video_player/video_player.dart';
+import 'dart:io' show Platform;
 
 class PrayerDetailScreenView extends StatefulWidget {
   dynamic contentData;
@@ -21,11 +24,22 @@ class PrayerDetailScreenView extends StatefulWidget {
 class _PrayerDetailScreenViewState extends State<PrayerDetailScreenView> {
   TextEditingController commentController = TextEditingController();
   PrayerDetailScreenController prayerDetailScreenController = PrayerDetailScreenController();
+  VideoPlayerController? videoPlayerController;
+  ChewieController? chewieController;
+  bool looping = false;
+  bool autoplay = false;
 
   @override
   void initState() {
     prayerDetailScreenController.getContentDetails(contentID: widget.contentData["ContentID"]);
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    videoPlayerController!.dispose();
+    chewieController!.dispose();
+    super.dispose();
   }
 
   @override
@@ -47,6 +61,7 @@ class _PrayerDetailScreenViewState extends State<PrayerDetailScreenView> {
             } else {
               return prayerDetailScreenController.contentDetails.isNotEmpty
                   ? SingleChildScrollView(
+                      physics: const BouncingScrollPhysics(),
                       child: Column(
                         children: [
                           Container(
@@ -109,8 +124,21 @@ class _PrayerDetailScreenViewState extends State<PrayerDetailScreenView> {
                                   SizedBox(
                                     height: 210,
                                     width: width - 40,
-                                    // child: Image.asset(AppImages().dummyImage,fit: BoxFit.fill),
-                                    child: ClipRRect(borderRadius: BorderRadius.circular(15), child: Image.network(prayerDetailScreenController.contentDetails["ContentThumb"], fit: BoxFit.fill)),
+                                    child: Chewie(
+                                      controller: ChewieController(
+                                        videoPlayerController: VideoPlayerController.network(prayerDetailScreenController.contentDetails["ContentFile"]),
+                                        autoInitialize: true,
+                                        autoPlay: autoplay,
+                                        looping: looping,
+                                        aspectRatio: 2,
+                                        materialProgressColors: ChewieProgressColors(
+                                          playedColor: backgroundCyan,
+                                          handleColor: backgroundWhite,
+                                          backgroundColor: backgroundWhite,
+                                          bufferedColor: backgroundWhite.withOpacity(0.5),
+                                        ),
+                                      ),
+                                    ),
                                   ),
                                   GestureDetector(
                                     onTap: () {
@@ -140,7 +168,7 @@ class _PrayerDetailScreenViewState extends State<PrayerDetailScreenView> {
                               Container(
                                 width: width,
                                 margin: const EdgeInsets.only(top: 10),
-                                padding: const EdgeInsets.only(left: 20, right: 20, top: 20, bottom: 95),
+                                padding: EdgeInsets.only(left: 20, right: 20, top: 20, bottom: Platform.isAndroid ? 95 : 140),
                                 decoration: const BoxDecoration(color: backgroundWhite, borderRadius: BorderRadius.only(topRight: Radius.circular(25), topLeft: Radius.circular(25))),
                                 child: Column(
                                   children: [
@@ -222,6 +250,7 @@ class _PrayerDetailScreenViewState extends State<PrayerDetailScreenView> {
                                             ),
                                           ]),
                                       child: SingleChildScrollView(
+                                        physics: const BouncingScrollPhysics(),
                                         child: Column(
                                           children: [
                                             Row(

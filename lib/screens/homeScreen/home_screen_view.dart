@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:sarvam/routes/app_pages.dart';
 import 'package:sarvam/utils/const_colors_key.dart';
 import 'package:sarvam/utils/const_image_key.dart';
+import 'dart:io' show Platform;
 
 class HomeScreenView extends StatefulWidget {
   const HomeScreenView({Key? key}) : super(key: key);
@@ -49,7 +50,7 @@ class _HomeScreenViewState extends State<HomeScreenView> {
       extendBody: true,
       backgroundColor: backgroundCyan,
       bottomNavigationBar: Container(
-        height: 75,
+        height: Platform.isAndroid ? 75 : 120,
         decoration: const BoxDecoration(
           color: backgroundWhite,
           borderRadius: BorderRadius.only(topLeft: Radius.circular(20), topRight: Radius.circular(20)),
@@ -64,69 +65,32 @@ class _HomeScreenViewState extends State<HomeScreenView> {
           items: <BottomNavigationBarItem>[
             BottomNavigationBarItem(
               icon: Column(
-                children: [
-                  Image.asset(AppImages().bottomIcon1,
-                      height: 22, width: 22, color: selectedIndex == 0 ? backgroundCyan : const Color(0xFFD6E3E4)),
-                  selectedIndex == 0
-                      ? Container(
-                          margin: const EdgeInsets.only(top: 5),
-                          height: 5,
-                          width: 5,
-                          decoration: const BoxDecoration(color: selectedTabIndicator, shape: BoxShape.circle))
-                      : Container(margin: const EdgeInsets.only(top: 5), height: 5, width: 5)
-                ],
+                children: [Image.asset(AppImages().bottomIcon1, height: 22, width: 22, color: selectedIndex == 0 ? backgroundCyan : const Color(0xFFD6E3E4)), selectedIndex == 0 ? Container(margin: const EdgeInsets.only(top: 5), height: 5, width: 5, decoration: const BoxDecoration(color: selectedTabIndicator, shape: BoxShape.circle)) : Container(margin: const EdgeInsets.only(top: 5), height: 5, width: 5)],
               ),
               label: "",
             ),
             BottomNavigationBarItem(
               icon: Column(
-                children: [
-                  Image.asset(selectedIndex == 1 ? AppImages().selectedBottomIcon2 : AppImages().unselectedBottomIcon2, height: 22, width: 22),
-                  selectedIndex == 1
-                      ? Container(
-                          margin: const EdgeInsets.only(top: 5),
-                          height: 5,
-                          width: 5,
-                          decoration: const BoxDecoration(color: selectedTabIndicator, shape: BoxShape.circle))
-                      : Container(margin: const EdgeInsets.only(top: 5), height: 5, width: 5)
-                ],
+                children: [Image.asset(selectedIndex == 1 ? AppImages().selectedBottomIcon2 : AppImages().unselectedBottomIcon2, height: 22, width: 22), selectedIndex == 1 ? Container(margin: const EdgeInsets.only(top: 5), height: 5, width: 5, decoration: const BoxDecoration(color: selectedTabIndicator, shape: BoxShape.circle)) : Container(margin: const EdgeInsets.only(top: 5), height: 5, width: 5)],
               ),
               label: "",
             ),
             BottomNavigationBarItem(
               icon: Padding(
                 padding: const EdgeInsets.symmetric(vertical: 5),
-                child: Image.asset(AppImages().bottomIcon3, scale: 2.5),
+                child: Image.asset(AppImages().bottomIcon3, height: 60, width: 60),
               ),
               label: "",
             ),
             BottomNavigationBarItem(
               icon: Column(
-                children: [
-                  Image.asset(AppImages().bottomIcon4, height: 22, width: 22, color: selectedIndex == 3 ? backgroundCyan : null),
-                  selectedIndex == 3
-                      ? Container(
-                          margin: const EdgeInsets.only(top: 5),
-                          height: 5,
-                          width: 5,
-                          decoration: const BoxDecoration(color: selectedTabIndicator, shape: BoxShape.circle))
-                      : Container(margin: const EdgeInsets.only(top: 5), height: 5, width: 5)
-                ],
+                children: [Image.asset(AppImages().bottomIcon4, height: 22, width: 22, color: selectedIndex == 3 ? backgroundCyan : null), selectedIndex == 3 ? Container(margin: const EdgeInsets.only(top: 5), height: 5, width: 5, decoration: const BoxDecoration(color: selectedTabIndicator, shape: BoxShape.circle)) : Container(margin: const EdgeInsets.only(top: 5), height: 5, width: 5)],
               ),
               label: "",
             ),
             BottomNavigationBarItem(
               icon: Column(
-                children: [
-                  Image.asset(AppImages().bottomIcon5, height: 22, width: 22, color: selectedIndex == 4 ? backgroundCyan : null),
-                  selectedIndex == 4
-                      ? Container(
-                          margin: const EdgeInsets.only(top: 5),
-                          height: 5,
-                          width: 5,
-                          decoration: const BoxDecoration(color: selectedTabIndicator, shape: BoxShape.circle))
-                      : Container(margin: const EdgeInsets.only(top: 5), height: 5, width: 5)
-                ],
+                children: [Image.asset(AppImages().bottomIcon5, height: 22, width: 22, color: selectedIndex == 4 ? backgroundCyan : null), selectedIndex == 4 ? Container(margin: const EdgeInsets.only(top: 5), height: 5, width: 5, decoration: const BoxDecoration(color: selectedTabIndicator, shape: BoxShape.circle)) : Container(margin: const EdgeInsets.only(top: 5), height: 5, width: 5)],
               ),
               label: "",
             ),

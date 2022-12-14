@@ -8,9 +8,11 @@ import 'package:sarvam/utils/const_colors_key.dart';
 import 'package:sarvam/utils/const_image_key.dart';
 import 'package:sarvam/utils/const_fonts_key.dart';
 import 'package:sarvam/widgets/loading_view.dart';
+import 'dart:io' show Platform;
 
 class PrayerScreenView extends StatefulWidget {
   dynamic subCategoryData;
+
   PrayerScreenView({Key? key, required this.subCategoryData}) : super(key: key);
 
   @override
@@ -46,7 +48,7 @@ class _PrayerScreenViewState extends State<PrayerScreenView> {
             child: Image.asset(AppImages().dailyRoutineBackground, fit: BoxFit.fill),
           ),
           Container(
-            margin: const EdgeInsets.only(left: 20, right: 20, top: 50, bottom: 75),
+            margin: EdgeInsets.only(left: 20, right: 20, top: 50, bottom: Platform.isAndroid ? 75 : 120),
             child: Column(
               children: [
                 SizedBox(
@@ -182,7 +184,7 @@ class _PrayerScreenViewState extends State<PrayerScreenView> {
                 Obx(() {
                   return SizedBox(
                     width: width,
-                    height: height - 350,
+                    height: height - (Platform.isAndroid ? 350 : 395),
                     child: prayerScreenController.loading.value
                         ? LoadingDialog()
                         : prayerScreenController.contentList.isNotEmpty

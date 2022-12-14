@@ -8,6 +8,7 @@ import 'package:sarvam/utils/const_colors_key.dart';
 import 'package:sarvam/utils/const_image_key.dart';
 import 'package:sarvam/utils/const_fonts_key.dart';
 import 'package:sarvam/widgets/loading_view.dart';
+import 'dart:io' show Platform;
 
 class DailyRoutineScreenView extends StatefulWidget {
   dynamic categoryData;
@@ -42,7 +43,7 @@ class _DailyRoutineScreenViewState extends State<DailyRoutineScreenView> {
             child: Image.asset(AppImages().dailyRoutineBackground, fit: BoxFit.fill),
           ),
           Container(
-            margin: const EdgeInsets.only(left: 20, right: 20, top: 50, bottom: 75),
+            margin: EdgeInsets.only(left: 20, right: 20, top: 50, bottom: Platform.isAndroid ? 75 : 120),
             child: Column(
               children: [
                 SizedBox(
@@ -98,67 +99,69 @@ class _DailyRoutineScreenViewState extends State<DailyRoutineScreenView> {
                 Obx(() {
                   return SizedBox(
                     width: width,
-                    height: height - 280,
+                    height: height - (Platform.isAndroid ? 280 : 325),
                     child: dailyRoutineScreenController.loading.value
                         ? LoadingDialog()
-                        : dailyRoutineScreenController.subCategoryList.isNotEmpty ? GridView.builder(
-                            shrinkWrap: true,
-                            physics: const ClampingScrollPhysics(),
-                            padding: const EdgeInsets.symmetric(vertical: 25),
-                            itemCount: dailyRoutineScreenController.subCategoryList.length,
-                            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisSpacing: 10, mainAxisSpacing: 15, crossAxisCount: 2, childAspectRatio: 2),
-                            itemBuilder: (BuildContext context, int index) {
-                              return GestureDetector(
-                                onTap: () {
-                                  setState(() {
-                                    selectedCategory = index;
-                                  });
-                                  Future.delayed(const Duration(milliseconds: 500), () {
-                                    Navigator.push(context, MaterialPageRoute(builder: (_) => PrayerScreenView(subCategoryData: dailyRoutineScreenController.subCategoryList[index])));
-                                  });
-                                },
-                                child: Stack(
-                                  alignment: Alignment.topCenter,
-                                  children: [
-                                    Container(
-                                      alignment: Alignment.center,
-                                      margin: const EdgeInsets.only(top: 15),
-                                      decoration: BoxDecoration(color: selectedCategory == index ? selectedCategoryGreen : backgroundWhite, borderRadius: const BorderRadius.all(Radius.circular(10))),
-                                      child: Text(
-                                        dailyRoutineScreenController.subCategoryList[index]["Name"],
-                                        style: TextStyle(fontSize: 15, fontFamily: ROBOTO_REGULAR, color: selectedCategory == index ? backgroundWhite : textBlack),
-                                      ),
+                        : dailyRoutineScreenController.subCategoryList.isNotEmpty
+                            ? GridView.builder(
+                                shrinkWrap: true,
+                                physics: const ClampingScrollPhysics(),
+                                padding: const EdgeInsets.symmetric(vertical: 25),
+                                itemCount: dailyRoutineScreenController.subCategoryList.length,
+                                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisSpacing: 10, mainAxisSpacing: 15, crossAxisCount: 2, childAspectRatio: 2),
+                                itemBuilder: (BuildContext context, int index) {
+                                  return GestureDetector(
+                                    onTap: () {
+                                      setState(() {
+                                        selectedCategory = index;
+                                      });
+                                      Future.delayed(const Duration(milliseconds: 500), () {
+                                        Navigator.push(context, MaterialPageRoute(builder: (_) => PrayerScreenView(subCategoryData: dailyRoutineScreenController.subCategoryList[index])));
+                                      });
+                                    },
+                                    child: Stack(
+                                      alignment: Alignment.topCenter,
+                                      children: [
+                                        Container(
+                                          alignment: Alignment.center,
+                                          margin: const EdgeInsets.only(top: 15),
+                                          decoration: BoxDecoration(color: selectedCategory == index ? selectedCategoryGreen : backgroundWhite, borderRadius: const BorderRadius.all(Radius.circular(10))),
+                                          child: Text(
+                                            dailyRoutineScreenController.subCategoryList[index]["Name"],
+                                            style: TextStyle(fontSize: 15, fontFamily: ROBOTO_REGULAR, color: selectedCategory == index ? backgroundWhite : textBlack),
+                                          ),
+                                        ),
+                                        selectedCategory == index
+                                            ? Image.asset(
+                                                AppImages().selectedDoneIconGreen,
+                                                fit: BoxFit.fill,
+                                                height: 30,
+                                                width: 30,
+                                              )
+                                            : Container(),
+                                        selectedCategory == index
+                                            ? Positioned(
+                                                bottom: -5,
+                                                right: -5,
+                                                child: Image.asset(
+                                                  AppImages().selectedLeafIcon,
+                                                  fit: BoxFit.fill,
+                                                  scale: 3.5,
+                                                ),
+                                              )
+                                            : Container(),
+                                      ],
                                     ),
-                                    selectedCategory == index
-                                        ? Image.asset(
-                                            AppImages().selectedDoneIconGreen,
-                                            fit: BoxFit.fill,
-                                            height: 30,
-                                            width: 30,
-                                          )
-                                        : Container(),
-                                    selectedCategory == index
-                                        ? Positioned(
-                                            bottom: -5,
-                                            right: -5,
-                                            child: Image.asset(
-                                              AppImages().selectedLeafIcon,
-                                              fit: BoxFit.fill,
-                                              scale: 3.5,
-                                            ),
-                                          )
-                                        : Container(),
-                                  ],
+                                  );
+                                },
+                              )
+                            : const Center(
+                                child: Text(
+                                  "Oops!\nNo Data Found",
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(fontSize: 20, fontFamily: ROBOTO_REGULAR, color: textBlack),
                                 ),
-                              );
-                            },
-                          ) : const Center(
-                      child: Text(
-                        "Oops!\nNo Data Found",
-                        textAlign: TextAlign.center,
-                        style: TextStyle(fontSize: 20, fontFamily: ROBOTO_REGULAR, color: textBlack),
-                      ),
-                    ),
+                              ),
                   );
                 }),
               ],

@@ -5,6 +5,7 @@ import 'package:sarvam/screens/membershipScreen/membership_screen_controller.dar
 import 'package:sarvam/utils/const_colors_key.dart';
 import 'package:sarvam/utils/const_fonts_key.dart';
 import 'package:sarvam/utils/const_image_key.dart';
+import 'dart:io' show Platform;
 
 class MembershipScreenView extends StatefulWidget {
   const MembershipScreenView({Key? key}) : super(key: key);
@@ -41,7 +42,7 @@ class _MembershipScreenViewState extends State<MembershipScreenView> {
             child: Image.asset(AppImages().subscriptionBackground2, fit: BoxFit.fill),
           ),
           Container(
-            margin: const EdgeInsets.only(top: 50, left: 20, right: 20, bottom: 75),
+            margin: EdgeInsets.only(top: 50, left: 20, right: 20, bottom: Platform.isAndroid ? 75 : 120),
             height: height,
             child: Column(
               children: [
@@ -71,6 +72,7 @@ class _MembershipScreenViewState extends State<MembershipScreenView> {
                   height: height * 0.45,
                   margin: const EdgeInsets.only(top: 50),
                   child: SingleChildScrollView(
+                    physics: const BouncingScrollPhysics(),
                     child: Container(
                       padding: const EdgeInsets.all(20),
                       decoration: const BoxDecoration(
@@ -125,7 +127,8 @@ class _MembershipScreenViewState extends State<MembershipScreenView> {
                                     (value) => {
                                       if (value)
                                         {
-                                          Navigator.pushNamed(context, Routes.CATEGORY_SCREEN),
+                                          // Navigator.pushNamed(context, Routes.CATEGORY_SCREEN),
+                                          Navigator.pushNamedAndRemoveUntil(context, Routes.CATEGORY_SCREEN, (r) => false),
                                         },
                                     },
                                   );
