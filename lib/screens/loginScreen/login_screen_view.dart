@@ -22,7 +22,8 @@ class _LoginScreenState extends State<LoginScreen> {
   final storage = GetStorage();
   TextEditingController email = TextEditingController();
   TextEditingController password = TextEditingController();
-  RegExp isValidEmail = RegExp(r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$');
+  RegExp isValidEmail = RegExp(
+      r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$');
   LoginScreenController loginScreenController = Get.put(LoginScreenController());
 
   void passwordHideShow() {
@@ -99,14 +100,27 @@ class _LoginScreenState extends State<LoginScreen> {
                             style: TextStyle(color: backgroundWhite, fontSize: 16, fontFamily: ROBOTO_MEDIUM),
                           ),
                           const SizedBox(height: 5),
-                          CustomTextField(
-                            textEditingController: password,
-                            keyboardType: TextInputType.text,
-                            textInputAction: TextInputAction.done,
-                            maxLine: 1,
-                            hint: "**********",
-                            obscureText: obscuredText,
-                            suffixIcon: GestureDetector(onTap: passwordHideShow, child: Icon(obscuredText ? Icons.visibility_off_rounded : Icons.visibility_rounded, color: Colors.black, size: 18)),
+                          Stack(
+                            alignment: Alignment.centerRight,
+                            children: [
+                              CustomTextField(
+                                textEditingController: password,
+                                keyboardType: TextInputType.text,
+                                textInputAction: TextInputAction.done,
+                                contentPaddingRight: 50,
+                                maxLine: 1,
+                                hint: "**********",
+                                obscureText: obscuredText,
+                              ),
+                              Positioned(
+                                right: 15,
+                                child: GestureDetector(
+                                    onTap: passwordHideShow,
+                                    child: Icon(obscuredText ? Icons.visibility_off_rounded : Icons.visibility_rounded,
+                                        color: Colors.black, size: 18)
+                                ),
+                              )
+                            ],
                           ),
                           const SizedBox(height: 10),
                           Row(
@@ -139,7 +153,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                 },
                                 child: const Text(
                                   "Forgot Password",
-                                  style: TextStyle(fontSize: 14, fontFamily: ROBOTO_MEDIUM, color: backgroundWhite, decoration: TextDecoration.underline),
+                                  style: TextStyle(
+                                      fontSize: 14, fontFamily: ROBOTO_MEDIUM, color: backgroundWhite, decoration: TextDecoration.underline),
                                 ),
                               ),
                             ],
@@ -155,11 +170,26 @@ class _LoginScreenState extends State<LoginScreen> {
                               buttonColor: Colors.transparent,
                               onTap: () async {
                                 if (email.text.toString().isEmpty) {
-                                  Get.snackbar("Oops!", "Email required!", icon: const Icon(Icons.error, color: Colors.red), duration: const Duration(seconds: 1), colorText: Colors.white, snackPosition: SnackPosition.TOP, backgroundColor: backgroundCyan);
+                                  Get.snackbar("Oops!", "Email required!",
+                                      icon: const Icon(Icons.error, color: Colors.red),
+                                      duration: const Duration(seconds: 1),
+                                      colorText: Colors.white,
+                                      snackPosition: SnackPosition.TOP,
+                                      backgroundColor: backgroundCyan);
                                 } else if (!isValidEmail.hasMatch(email.text.toString())) {
-                                  Get.snackbar("Oops!", "Enter valid email address!", icon: const Icon(Icons.error, color: Colors.red), duration: const Duration(seconds: 1), colorText: Colors.white, snackPosition: SnackPosition.TOP, backgroundColor: backgroundCyan);
+                                  Get.snackbar("Oops!", "Enter valid email address!",
+                                      icon: const Icon(Icons.error, color: Colors.red),
+                                      duration: const Duration(seconds: 1),
+                                      colorText: Colors.white,
+                                      snackPosition: SnackPosition.TOP,
+                                      backgroundColor: backgroundCyan);
                                 } else if (password.text.toString().isEmpty || password.text.length < 6) {
-                                  Get.snackbar("Oops!", "You have to enter at least 6 digit password!", icon: const Icon(Icons.error, color: Colors.red), duration: const Duration(seconds: 1), colorText: Colors.white, snackPosition: SnackPosition.TOP, backgroundColor: backgroundCyan);
+                                  Get.snackbar("Oops!", "You have to enter at least 6 digit password!",
+                                      icon: const Icon(Icons.error, color: Colors.red),
+                                      duration: const Duration(seconds: 1),
+                                      colorText: Colors.white,
+                                      snackPosition: SnackPosition.TOP,
+                                      backgroundColor: backgroundCyan);
                                 } else {
                                   await loginScreenController.logIn(email.text.trim().toString(), password.text.trim().toString());
                                 }

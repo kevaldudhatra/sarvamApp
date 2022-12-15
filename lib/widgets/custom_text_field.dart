@@ -13,7 +13,6 @@ class CustomTextField extends StatefulWidget {
   List<TextInputFormatter>? inputFormatters;
   TextInputAction? textInputAction = TextInputAction.done;
   bool? obscureText = false;
-  Widget? suffixIcon;
   TextAlign? textAlign = TextAlign.start;
   double? contentPaddingTop = 0.0;
   double? contentPaddingBottom = 0.0;
@@ -37,7 +36,6 @@ class CustomTextField extends StatefulWidget {
     this.keyboardType,
     this.inputFormatters,
     this.obscureText = false,
-    this.suffixIcon,
     this.textAlign,
     this.contentPaddingTop = 0.0,
     this.contentPaddingBottom = 0.0,
@@ -93,7 +91,6 @@ class _CustomTextFieldState extends State<CustomTextField> {
           borderRadius: BorderRadius.all(Radius.circular(10.0)),
           borderSide: BorderSide(color: Colors.transparent),
         ),
-        suffixIcon: widget.suffixIcon ?? const SizedBox(),
       ),
     );
   }
