@@ -88,6 +88,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           const SizedBox(height: 5),
                           CustomTextField(
                             textEditingController: email,
+                            maxLine: 1,
                             keyboardType: TextInputType.emailAddress,
                             textInputAction: TextInputAction.next,
                             hint: "example@gmail.com",

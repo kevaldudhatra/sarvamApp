@@ -78,6 +78,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                           ),
                           const SizedBox(height: 5),
                           CustomTextField(
+                            maxLine: 1,
                             textEditingController: otp,
                             keyboardType: TextInputType.number,
                             textInputAction: TextInputAction.next,

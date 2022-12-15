@@ -41,7 +41,7 @@ class _MembershipScreenViewState extends State<MembershipScreenView> {
             child: Image.asset(AppImages().subscriptionBackground2, fit: BoxFit.fill),
           ),
           Container(
-            margin: EdgeInsets.only(top: 50, left: 20, right: 20),
+            margin: const EdgeInsets.only(top: 50, left: 20, right: 20),
             height: height,
             child: Column(
               children: [

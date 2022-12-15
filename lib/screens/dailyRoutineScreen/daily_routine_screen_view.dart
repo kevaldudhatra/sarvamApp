@@ -42,7 +42,7 @@ class _DailyRoutineScreenViewState extends State<DailyRoutineScreenView> {
             child: Image.asset(AppImages().dailyRoutineBackground, fit: BoxFit.fill),
           ),
           Container(
-            margin: EdgeInsets.only(left: 20, right: 20, top: 50),
+            margin: const EdgeInsets.only(left: 20, right: 20, top: 50),
             child: Column(
               children: [
                 SizedBox(
@@ -96,7 +96,7 @@ class _DailyRoutineScreenViewState extends State<DailyRoutineScreenView> {
                   ),
                 ),
                 Obx(() {
-                  return Container(
+                  return SizedBox(
                     width: width,
                     height: height - 255,
                     child: dailyRoutineScreenController.loading.value

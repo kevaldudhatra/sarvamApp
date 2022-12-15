@@ -543,6 +543,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     ),
                     const SizedBox(height: 5),
                     CustomTextField(
+                      maxLine: 1,
                       textEditingController: name,
                       keyboardType: TextInputType.text,
                       textInputAction: TextInputAction.next,
@@ -555,6 +556,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     ),
                     const SizedBox(height: 5),
                     CustomTextField(
+                      maxLine: 1,
                       textEditingController: email,
                       keyboardType: TextInputType.emailAddress,
                       textInputAction: TextInputAction.next,
@@ -567,6 +569,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     ),
                     const SizedBox(height: 5),
                     CustomTextField(
+                      maxLine: 1,
                       textEditingController: password,
                       keyboardType: TextInputType.text,
                       textInputAction: TextInputAction.next,
@@ -639,6 +642,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           ),
                           Expanded(
                             child: CustomTextField(
+                              maxLine: 1,
                               textEditingController: phoneNumber,
                               keyboardType: TextInputType.phone,
                               textInputAction: TextInputAction.next,
@@ -701,6 +705,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               height: 50,
                               width: width / 2 - 30,
                               child: CustomTextField(
+                                maxLine: 1,
                                 textEditingController: postalCode,
                                 keyboardType: TextInputType.number,
                                 textInputAction: TextInputAction.next,

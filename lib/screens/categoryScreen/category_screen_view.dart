@@ -37,7 +37,7 @@ class _CategoryScreenViewState extends State<CategoryScreenView> {
             child: Image.asset(AppImages().categoryBackground, fit: BoxFit.fill),
           ),
           Container(
-            margin: EdgeInsets.only(left: 20, right: 20, top: 50),
+            margin: const EdgeInsets.only(left: 20, right: 20, top: 50),
             child: Column(
               children: [
                 SizedBox(
@@ -102,7 +102,7 @@ class _CategoryScreenViewState extends State<CategoryScreenView> {
                                       Text(
                                         categoryScreenController.categoryList[0]["Name"],
                                         textAlign: TextAlign.center,
-                                        style: const TextStyle(fontFamily: ROBOTO_BOLD, fontSize: 25, color: backgroundWhite),
+                                        style: const TextStyle(fontFamily: ROBOTO_BOLD, fontSize: 20, color: backgroundWhite),
                                       )
                                     ],
                                   ),
@@ -121,7 +121,7 @@ class _CategoryScreenViewState extends State<CategoryScreenView> {
                                       Text(
                                         categoryScreenController.categoryList[1]["Name"],
                                         textAlign: TextAlign.center,
-                                        style: const TextStyle(fontFamily: ROBOTO_BOLD, fontSize: 25, color: backgroundWhite),
+                                        style: const TextStyle(fontFamily: ROBOTO_BOLD, fontSize: 20, color: backgroundWhite),
                                       )
                                     ],
                                   ),
@@ -147,7 +147,7 @@ class _CategoryScreenViewState extends State<CategoryScreenView> {
                                       Text(
                                         categoryScreenController.categoryList[2]["Name"],
                                         textAlign: TextAlign.center,
-                                        style: const TextStyle(fontFamily: ROBOTO_BOLD, fontSize: 25, color: backgroundWhite),
+                                        style: const TextStyle(fontFamily: ROBOTO_BOLD, fontSize: 20, color: backgroundWhite),
                                       )
                                     ],
                                   ),
@@ -166,7 +166,7 @@ class _CategoryScreenViewState extends State<CategoryScreenView> {
                                       Text(
                                         categoryScreenController.categoryList[3]["Name"],
                                         textAlign: TextAlign.center,
-                                        style: const TextStyle(fontFamily: ROBOTO_BOLD, fontSize: 25, color: backgroundWhite),
+                                        style: const TextStyle(fontFamily: ROBOTO_BOLD, fontSize: 20, color: backgroundWhite),
                                       )
                                     ],
                                   ),
