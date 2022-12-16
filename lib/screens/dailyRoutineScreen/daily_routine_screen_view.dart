@@ -85,13 +85,13 @@ class _DailyRoutineScreenViewState extends State<DailyRoutineScreenView> {
                       const SizedBox(height: 25),
                       Text(
                         widget.categoryData["Name"],
-                        style: const TextStyle(fontSize: 25, fontFamily: ROBOTO_MEDIUM, color: textBlack),
+                        style: const TextStyle(fontSize: 22, fontFamily: ROBOTO_MEDIUM, color: textBlack),
                       ),
                       const SizedBox(height: 5),
-                      // const Text(
-                      //   "Lorem ipsum is a placeholder",
-                      //   style: TextStyle(fontSize: 15, fontFamily: ROBOTO_REGULAR, color: textBlack),
-                      // ),
+                      const Text(
+                        "Lorem ipsum is a placeholder",
+                        style: TextStyle(fontSize: 13, fontFamily: ROBOTO_REGULAR, color: textBlack),
+                      ),
                     ],
                   ),
                 ),

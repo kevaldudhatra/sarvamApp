@@ -89,7 +89,7 @@ class _UploadScreenViewState extends State<UploadScreenView> {
                           padding: EdgeInsets.only(left: 20, right: 20),
                           child: Text(
                             "Upload Your Work",
-                            style: TextStyle(fontSize: 25, fontFamily: ROBOTO_MEDIUM, color: textBlack),
+                            style: TextStyle(fontSize: 22, fontFamily: ROBOTO_MEDIUM, color: textBlack),
                           ),
                         ),
                         const SizedBox(height: 5),
@@ -97,7 +97,7 @@ class _UploadScreenViewState extends State<UploadScreenView> {
                           padding: EdgeInsets.only(left: 20, right: 20),
                           child: Text(
                             "Lorem ipsum is a placeholder",
-                            style: TextStyle(fontSize: 15, fontFamily: ROBOTO_REGULAR, color: textBlack),
+                            style: TextStyle(fontSize: 13, fontFamily: ROBOTO_REGULAR, color: textBlack),
                           ),
                         ),
                       ],
@@ -199,7 +199,7 @@ class _UploadScreenViewState extends State<UploadScreenView> {
                                   const SizedBox(height: 5),
                                   Text(
                                     "Max. File size : 200mb",
-                                    style: TextStyle(color: textBlack.withOpacity(0.5), fontSize: 15, fontFamily: ROBOTO_BOLD),
+                                    style: TextStyle(color: Colors.grey, fontSize: 15, fontFamily: ROBOTO_BOLD),
                                   ),
                                 ],
                               ),

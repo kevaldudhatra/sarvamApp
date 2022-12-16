@@ -97,7 +97,7 @@ class _PrayerDetailScreenViewState extends State<PrayerDetailScreenView> {
                                   padding: const EdgeInsets.only(left: 20, right: 20),
                                   child: Text(
                                     prayerDetailScreenController.contentDetails["Name"],
-                                    style: const TextStyle(fontSize: 30, fontFamily: ROBOTO_MEDIUM, color: textBlack),
+                                    style: const TextStyle(fontSize: 22, fontFamily: ROBOTO_MEDIUM, color: textBlack),
                                   ),
                                 ),
                                 const SizedBox(height: 5),
@@ -105,7 +105,7 @@ class _PrayerDetailScreenViewState extends State<PrayerDetailScreenView> {
                                   padding: const EdgeInsets.only(left: 20, right: 20),
                                   child: Text(
                                     prayerDetailScreenController.contentDetails["ShortDesp"],
-                                    style: const TextStyle(fontSize: 15, fontFamily: ROBOTO_REGULAR, color: textBlack),
+                                    style: const TextStyle(fontSize: 13, fontFamily: ROBOTO_REGULAR, color: textBlack),
                                   ),
                                 ),
                               ],
@@ -232,7 +232,7 @@ class _PrayerDetailScreenViewState extends State<PrayerDetailScreenView> {
                                     ),
                                     Container(
                                       alignment: Alignment.centerLeft,
-                                      margin: const EdgeInsets.symmetric(vertical: 5),
+                                      margin: const EdgeInsets.symmetric(vertical: 10),
                                       child: const Text(
                                         "Comments",
                                         style: TextStyle(fontSize: 15, fontFamily: ROBOTO_BOLD, color: textBlack),

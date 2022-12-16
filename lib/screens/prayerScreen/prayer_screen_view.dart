@@ -81,12 +81,12 @@ class _PrayerScreenViewState extends State<PrayerScreenView> {
                       const SizedBox(height: 25),
                       Text(
                         "Daily Routine  > ${widget.subCategoryData["Name"]}",
-                        style: const TextStyle(fontSize: 25, fontFamily: ROBOTO_MEDIUM, color: textBlack),
+                        style: const TextStyle(fontSize: 22, fontFamily: ROBOTO_MEDIUM, color: textBlack),
                       ),
                       const SizedBox(height: 5),
                       Text(
                         widget.subCategoryData["ShortDesp"],
-                        style: const TextStyle(fontSize: 15, fontFamily: ROBOTO_REGULAR, color: textBlack),
+                        style: const TextStyle(fontSize: 13, fontFamily: ROBOTO_REGULAR, color: textBlack),
                       ),
                     ],
                   ),
