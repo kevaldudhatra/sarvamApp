@@ -29,7 +29,7 @@ class ResetPasswordScreenController extends GetxController {
     if (response.statusCode == 200 && data["Success"] == true) {
       Get.toNamed(Routes.LOGIN_SCREEN);
     } else {
-      Get.snackbar("Oops!", "Reset password failed please try again later", icon: const Icon(Icons.error, color: Colors.red), duration: const Duration(seconds: 1), colorText: Colors.white, snackPosition: SnackPosition.TOP, backgroundColor: backgroundCyan);
+      Get.snackbar("Oops!", "Reset password failed please try again later", icon: const Icon(Icons.error, color: Colors.red), colorText: Colors.white, snackPosition: SnackPosition.TOP, backgroundColor: backgroundCyan);
     }
   }
 }

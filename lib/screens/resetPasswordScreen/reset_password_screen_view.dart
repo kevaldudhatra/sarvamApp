@@ -18,9 +18,16 @@ class ResetPasswordScreen extends StatefulWidget {
 class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
   final storage = GetStorage();
   final args = Get.arguments;
+  bool obscuredText = true;
   TextEditingController otp = TextEditingController();
   TextEditingController password = TextEditingController();
   ResetPasswordScreenController resetPasswordScreenController = Get.put(ResetPasswordScreenController());
+
+  void passwordHideShow() {
+    setState(() {
+      obscuredText = !obscuredText;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -90,12 +97,23 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                             style: TextStyle(color: backgroundWhite, fontSize: 15, fontFamily: ROBOTO_MEDIUM),
                           ),
                           const SizedBox(height: 5),
-                          CustomTextField(
-                            textEditingController: password,
-                            keyboardType: TextInputType.text,
-                            textInputAction: TextInputAction.done,
-                            maxLine: 1,
-                            hint: "Enter new password",
+                          Stack(
+                            alignment: Alignment.centerRight,
+                            children: [
+                              CustomTextField(
+                                textEditingController: password,
+                                keyboardType: TextInputType.text,
+                                textInputAction: TextInputAction.done,
+                                contentPaddingRight: 50,
+                                maxLine: 1,
+                                hint: "**********",
+                                obscureText: obscuredText,
+                              ),
+                              Positioned(
+                                right: 15,
+                                child: GestureDetector(onTap: passwordHideShow, child: Icon(obscuredText ? Icons.visibility_off_rounded : Icons.visibility_rounded, color: Colors.black, size: 18)),
+                              )
+                            ],
                           ),
                           Container(
                             alignment: Alignment.center,
@@ -108,9 +126,9 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                               buttonColor: Colors.transparent,
                               onTap: () async {
                                 if (otp.text.toString().isEmpty) {
-                                  Get.snackbar("Oops!", "Otp required!", icon: const Icon(Icons.error, color: Colors.red), duration: const Duration(seconds: 1), colorText: Colors.white, snackPosition: SnackPosition.TOP, backgroundColor: backgroundCyan);
+                                  Get.snackbar("Oops!", "Otp required!", icon: const Icon(Icons.error, color: Colors.red), colorText: Colors.white, snackPosition: SnackPosition.TOP, backgroundColor: backgroundCyan);
                                 } else if (password.text.toString().isEmpty || password.text.length < 6) {
-                                  Get.snackbar("Oops!", "You have to enter at least 6 digit password!", icon: const Icon(Icons.error, color: Colors.red), duration: const Duration(seconds: 1), colorText: Colors.white, snackPosition: SnackPosition.TOP, backgroundColor: backgroundCyan);
+                                  Get.snackbar("Oops!", "You have to enter at least 6 digit password!", icon: const Icon(Icons.error, color: Colors.red), colorText: Colors.white, snackPosition: SnackPosition.TOP, backgroundColor: backgroundCyan);
                                 } else {
                                   resetPasswordScreenController.resetPassword(args[0], args[1], otp.text.trim().toString(), password.text.trim().toString());
                                 }

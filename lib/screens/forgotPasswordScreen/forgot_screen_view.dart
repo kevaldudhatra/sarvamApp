@@ -92,9 +92,9 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                               buttonColor: Colors.transparent,
                               onTap: () {
                                 if (email.text.toString().isEmpty) {
-                                  Get.snackbar("Oops!", "Email required!", icon: const Icon(Icons.error, color: Colors.red), duration: const Duration(seconds: 1), colorText: Colors.white, snackPosition: SnackPosition.TOP, backgroundColor: backgroundCyan);
+                                  Get.snackbar("Oops!", "Email required!", icon: const Icon(Icons.error, color: Colors.red), colorText: Colors.white, snackPosition: SnackPosition.TOP, backgroundColor: backgroundCyan);
                                 } else if (!isValidEmail.hasMatch(email.text.toString())) {
-                                  Get.snackbar("Oops!", "Enter valid email address!", icon: const Icon(Icons.error, color: Colors.red), duration: const Duration(seconds: 1), colorText: Colors.white, snackPosition: SnackPosition.TOP, backgroundColor: backgroundCyan);
+                                  Get.snackbar("Oops!", "Enter valid email address!", icon: const Icon(Icons.error, color: Colors.red), colorText: Colors.white, snackPosition: SnackPosition.TOP, backgroundColor: backgroundCyan);
                                 } else {
                                   forgotPasswordScreenController.forgotPassword(email.text.trim().toString());
                                 }

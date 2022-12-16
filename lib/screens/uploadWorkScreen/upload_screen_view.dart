@@ -197,7 +197,7 @@ class _UploadScreenViewState extends State<UploadScreenView> {
                                     style: TextStyle(color: textBlack, fontSize: 15, fontFamily: ROBOTO_BOLD),
                                   ),
                                   const SizedBox(height: 5),
-                                  Text(
+                                  const Text(
                                     "Max. File size : 200mb",
                                     style: TextStyle(color: Colors.grey, fontSize: 15, fontFamily: ROBOTO_BOLD),
                                   ),
@@ -274,11 +274,11 @@ class _UploadScreenViewState extends State<UploadScreenView> {
                                 buttonColor: backgroundCyan,
                                 onTap: () async {
                                   if (workName.text.toString().isEmpty) {
-                                    Get.snackbar("Oops!", "Work Name required!", icon: const Icon(Icons.error, color: Colors.red), duration: const Duration(seconds: 1), colorText: Colors.white, snackPosition: SnackPosition.TOP, backgroundColor: backgroundCyan);
+                                    Get.snackbar("Oops!", "Work Name required!", icon: const Icon(Icons.error, color: Colors.red), colorText: Colors.white, snackPosition: SnackPosition.TOP, backgroundColor: backgroundCyan);
                                   } else if (workDescription.text.toString().isEmpty) {
-                                    Get.snackbar("Oops!", "Work Description required!", icon: const Icon(Icons.error, color: Colors.red), duration: const Duration(seconds: 1), colorText: Colors.white, snackPosition: SnackPosition.TOP, backgroundColor: backgroundCyan);
+                                    Get.snackbar("Oops!", "Work Description required!", icon: const Icon(Icons.error, color: Colors.red), colorText: Colors.white, snackPosition: SnackPosition.TOP, backgroundColor: backgroundCyan);
                                   } else if (selectedFile == null) {
-                                    Get.snackbar("Oops!", "Please select the file to upload", icon: const Icon(Icons.error, color: Colors.red), duration: const Duration(seconds: 1), colorText: Colors.white, snackPosition: SnackPosition.TOP, backgroundColor: backgroundCyan);
+                                    Get.snackbar("Oops!", "Please select the file to upload", icon: const Icon(Icons.error, color: Colors.red), colorText: Colors.white, snackPosition: SnackPosition.TOP, backgroundColor: backgroundCyan);
                                   } else {
                                     var result = await uploadScreenController.uploadMedia(contentID: arguments["contentID"], workName: workName.text.toString(), workDescription: workDescription.text.toString(), mediaFile: selectedFile!);
                                     if (result) {

@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_typing_uninitialized_variables
 
 import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:sarvam/routes/app_pages.dart';
@@ -20,10 +21,13 @@ class RegisterScreen extends StatefulWidget {
 
 class _RegisterScreenState extends State<RegisterScreen> {
   RegisterScreenController registerScreenController = Get.put(RegisterScreenController());
+  bool passwordObscuredText = true;
+  bool confirmObscuredText = true;
   RegExp isValidEmail = RegExp(r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$');
   TextEditingController name = TextEditingController();
   TextEditingController email = TextEditingController();
   TextEditingController password = TextEditingController();
+  TextEditingController confirmPassword = TextEditingController();
   TextEditingController phoneNumber = TextEditingController();
   TextEditingController postalCode = TextEditingController();
   TextEditingController address = TextEditingController();
@@ -447,39 +451,68 @@ class _RegisterScreenState extends State<RegisterScreen> {
     "+263"
   ];
 
+  void passwordHideShow() {
+    setState(() {
+      passwordObscuredText = !passwordObscuredText;
+    });
+  }
+
+  void confirmPasswordHideShow() {
+    setState(() {
+      confirmObscuredText = !confirmObscuredText;
+    });
+  }
+
   Future<void> selectDate(BuildContext context) async {
-    final DateTime? picked = await showDatePicker(
+    await showCupertinoModalPopup(
       context: context,
-      initialDate: DateTime.now(),
-      firstDate: DateTime(1950),
-      lastDate: DateTime(2100),
-      builder: (context, child) {
-        return Theme(
-          data: Theme.of(context).copyWith(
-            colorScheme: const ColorScheme.light(
-              primary: backgroundCyan,
-              onPrimary: textBlack,
-              onSurface: textBlack,
-            ),
-            textButtonTheme: TextButtonThemeData(
-              style: TextButton.styleFrom(
-                foregroundColor: backgroundCyan, // button text color
+      builder: (_) => Container(
+        height: MediaQuery.of(context).size.height / 3,
+        decoration: const BoxDecoration(color: backgroundWhite, borderRadius: BorderRadius.only(topLeft: Radius.circular(15), topRight: Radius.circular(15))),
+        child: Column(
+          children: [
+            Container(
+              height: 50,
+              padding: const EdgeInsets.symmetric(horizontal: 10),
+              child: Row(
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  CupertinoButton(
+                    child: const Text('OK', style: TextStyle(fontFamily: ROBOTO_MEDIUM, color: backgroundCyan)),
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                  ),
+                  CupertinoButton(
+                    child: const Text('CANCEL', style: TextStyle(fontFamily: ROBOTO_MEDIUM, color: backgroundCyan)),
+                    onPressed: () {
+                      setState(() {
+                        selectedDate = "";
+                        Navigator.of(context).pop();
+                      });
+                    },
+                  ),
+                ],
               ),
             ),
-          ),
-          child: child!,
-        );
-      },
+            SizedBox(
+              height: MediaQuery.of(context).size.height / 3 - 50,
+              child: CupertinoDatePicker(
+                  backgroundColor: backgroundWhite,
+                  mode: CupertinoDatePickerMode.date,
+                  initialDateTime: DateTime.now(),
+                  use24hFormat: true,
+                  onDateTimeChanged: (DateTime newDate) {
+                    setState(() {
+                      selectedDate = "${newDate.day}/${newDate.month}/${newDate.year}";
+                    });
+                  }),
+            ),
+          ],
+        ),
+      ),
     );
-    if (picked != null && picked != DateTime.now()) {
-      setState(() {
-        selectedDate = "${picked.day}/${picked.month}/${picked.year}";
-      });
-    } else {
-      setState(() {
-        selectedDate = "";
-      });
-    }
   }
 
   @override
@@ -568,12 +601,47 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       style: TextStyle(color: backgroundWhite, fontSize: 15, fontFamily: ROBOTO_MEDIUM),
                     ),
                     const SizedBox(height: 5),
-                    CustomTextField(
-                      maxLine: 1,
-                      textEditingController: password,
-                      keyboardType: TextInputType.text,
-                      textInputAction: TextInputAction.next,
-                      hint: "Enter Your Password",
+                    Stack(
+                      alignment: Alignment.centerRight,
+                      children: [
+                        CustomTextField(
+                          textEditingController: password,
+                          keyboardType: TextInputType.text,
+                          textInputAction: TextInputAction.done,
+                          contentPaddingRight: 50,
+                          maxLine: 1,
+                          hint: "**********",
+                          obscureText: passwordObscuredText,
+                        ),
+                        Positioned(
+                          right: 15,
+                          child: GestureDetector(onTap: passwordHideShow, child: Icon(passwordObscuredText ? Icons.visibility_off_rounded : Icons.visibility_rounded, color: Colors.black, size: 18)),
+                        )
+                      ],
+                    ),
+                    const SizedBox(height: 20),
+                    const Text(
+                      "Confirm Password*",
+                      style: TextStyle(color: backgroundWhite, fontSize: 15, fontFamily: ROBOTO_MEDIUM),
+                    ),
+                    const SizedBox(height: 5),
+                    Stack(
+                      alignment: Alignment.centerRight,
+                      children: [
+                        CustomTextField(
+                          textEditingController: confirmPassword,
+                          keyboardType: TextInputType.text,
+                          textInputAction: TextInputAction.done,
+                          contentPaddingRight: 50,
+                          maxLine: 1,
+                          hint: "**********",
+                          obscureText: confirmObscuredText,
+                        ),
+                        Positioned(
+                          right: 15,
+                          child: GestureDetector(onTap: confirmPasswordHideShow, child: Icon(confirmObscuredText ? Icons.visibility_off_rounded : Icons.visibility_rounded, color: Colors.black, size: 18)),
+                        )
+                      ],
                     ),
                     const SizedBox(height: 20),
                     const Text(
@@ -747,13 +815,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        SizedBox(
-                          width: width / 3 - 15,
+                        Expanded(
                           child: RadioListTile(
                               title: Transform.translate(
-                                offset: const Offset(-20,0),
+                                offset: const Offset(-20, 0),
                                 child: const Text(
-                                  'Male ',overflow: TextOverflow.ellipsis,
+                                  'Male',
+                                  overflow: TextOverflow.ellipsis,
                                   style: TextStyle(color: backgroundWhite, fontFamily: ROBOTO_REGULAR, fontSize: 15),
                                 ),
                               ),
@@ -769,13 +837,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 });
                               }),
                         ),
-                        SizedBox(
-                          width: width / 3 - 10,
+                        Expanded(
                           child: RadioListTile(
                               title: Transform.translate(
                                 offset: const Offset(-20, 0),
                                 child: const Text(
-                                  'Female',overflow: TextOverflow.ellipsis,
+                                  'Female',
+                                  overflow: TextOverflow.ellipsis,
                                   style: TextStyle(color: backgroundWhite, fontFamily: ROBOTO_REGULAR, fontSize: 15),
                                 ),
                               ),
@@ -791,13 +859,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 });
                               }),
                         ),
-                        SizedBox(
-                          width: width / 3 - 15,
+                        Expanded(
                           child: RadioListTile(
                               title: Transform.translate(
                                 offset: const Offset(-20, 0),
                                 child: const Text(
-                                  'Other',overflow: TextOverflow.ellipsis,
+                                  'Other',
+                                  overflow: TextOverflow.ellipsis,
                                   style: TextStyle(color: backgroundWhite, fontFamily: ROBOTO_REGULAR, fontSize: 15),
                                 ),
                               ),
@@ -826,21 +894,23 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         buttonColor: Colors.transparent,
                         onTap: () async {
                           if (name.text.toString().isEmpty) {
-                            Get.snackbar("Oops!", "Name required!", icon: const Icon(Icons.error, color: Colors.red), duration: const Duration(seconds: 1), colorText: textBlack, snackPosition: SnackPosition.TOP, backgroundColor: backgroundWhite);
+                            Get.snackbar("Oops!", "Name required!", icon: const Icon(Icons.error, color: Colors.red), colorText: textBlack, snackPosition: SnackPosition.TOP, backgroundColor: backgroundWhite);
                           } else if (email.text.toString().isEmpty) {
-                            Get.snackbar("Oops!", "Email required!", icon: const Icon(Icons.error, color: Colors.red), duration: const Duration(seconds: 1), colorText: textBlack, snackPosition: SnackPosition.TOP, backgroundColor: backgroundWhite);
+                            Get.snackbar("Oops!", "Email required!", icon: const Icon(Icons.error, color: Colors.red), colorText: textBlack, snackPosition: SnackPosition.TOP, backgroundColor: backgroundWhite);
                           } else if (!isValidEmail.hasMatch(email.text.toString())) {
-                            Get.snackbar("Oops!", "Enter valid email address!", icon: const Icon(Icons.error, color: Colors.red), duration: const Duration(seconds: 1), colorText: textBlack, snackPosition: SnackPosition.TOP, backgroundColor: backgroundWhite);
+                            Get.snackbar("Oops!", "Enter valid email address!", icon: const Icon(Icons.error, color: Colors.red), colorText: textBlack, snackPosition: SnackPosition.TOP, backgroundColor: backgroundWhite);
                           } else if (password.text.toString().isEmpty || password.text.length < 6) {
-                            Get.snackbar("Oops!", "You have to enter at least 6 digit password!", icon: const Icon(Icons.error, color: Colors.red), duration: const Duration(seconds: 1), colorText: textBlack, snackPosition: SnackPosition.TOP, backgroundColor: backgroundWhite);
+                            Get.snackbar("Oops!", "You have to enter at least 6 digit password!", icon: const Icon(Icons.error, color: Colors.red), colorText: textBlack, snackPosition: SnackPosition.TOP, backgroundColor: backgroundWhite);
+                          } else if (password.text.toString() != confirmPassword.text.toString()) {
+                            Get.snackbar("Oops!", "Password and ConfirmPassword not match!", icon: const Icon(Icons.error, color: Colors.red), colorText: textBlack, snackPosition: SnackPosition.TOP, backgroundColor: backgroundWhite);
                           } else if (selectedDate == "") {
-                            Get.snackbar("Oops!", "Date of Birth required!", icon: const Icon(Icons.error, color: Colors.red), duration: const Duration(seconds: 1), colorText: textBlack, snackPosition: SnackPosition.TOP, backgroundColor: backgroundWhite);
-                          } else if (phoneNumber.text.toString().isEmpty) {
-                            Get.snackbar("Oops!", "PhoneNumber required!", icon: const Icon(Icons.error, color: Colors.red), duration: const Duration(seconds: 1), colorText: textBlack, snackPosition: SnackPosition.TOP, backgroundColor: backgroundWhite);
+                            Get.snackbar("Oops!", "Date of Birth required!", icon: const Icon(Icons.error, color: Colors.red), colorText: textBlack, snackPosition: SnackPosition.TOP, backgroundColor: backgroundWhite);
+                          } else if (phoneNumber.text.toString().isEmpty || phoneNumber.text.length < 10) {
+                            Get.snackbar("Oops!", "Enter valid phoneNumber!", icon: const Icon(Icons.error, color: Colors.red), colorText: textBlack, snackPosition: SnackPosition.TOP, backgroundColor: backgroundWhite);
                           } else if (postalCode.text.toString().isEmpty) {
-                            Get.snackbar("Oops!", "Pincode required!", icon: const Icon(Icons.error, color: Colors.red), duration: const Duration(seconds: 1), colorText: textBlack, snackPosition: SnackPosition.TOP, backgroundColor: backgroundWhite);
+                            Get.snackbar("Oops!", "Pincode required!", icon: const Icon(Icons.error, color: Colors.red), colorText: textBlack, snackPosition: SnackPosition.TOP, backgroundColor: backgroundWhite);
                           } else if (address.text.toString().isEmpty) {
-                            Get.snackbar("Oops!", "Address required!", icon: const Icon(Icons.error, color: Colors.red), duration: const Duration(seconds: 1), colorText: textBlack, snackPosition: SnackPosition.TOP, backgroundColor: backgroundWhite);
+                            Get.snackbar("Oops!", "Address required!", icon: const Icon(Icons.error, color: Colors.red), colorText: textBlack, snackPosition: SnackPosition.TOP, backgroundColor: backgroundWhite);
                           } else {
                             registerScreenController.register(name.text.toString(), email.text.toString(), password.text.toString(), selectedDate, selectedPhoneCode!, phoneNumber.text.toString(), selectedCountry!, postalCode.text.toString(), address.text.toString(), role);
                           }

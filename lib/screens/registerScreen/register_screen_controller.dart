@@ -12,18 +12,7 @@ import 'package:http/http.dart' as http;
 class RegisterScreenController extends GetxController {
   final storage = GetStorage();
 
-  Future<dynamic> register(
-      String name,
-      String email,
-      String password,
-      String selectedDate,
-      String selectedPhoneCode,
-      String phoneNumber,
-      String selectedCountry,
-      String postalCode,
-      String address,
-      String role, {bool isLoading = true}) async {
-
+  Future<dynamic> register(String name, String email, String password, String selectedDate, String selectedPhoneCode, String phoneNumber, String selectedCountry, String postalCode, String address, String role, {bool isLoading = true}) async {
     print("register input Data $name");
     print("register input Data $email");
     print("register input Data $password");
@@ -38,21 +27,7 @@ class RegisterScreenController extends GetxController {
     if (isLoading) {
       Get.dialog(LoadingDialog(), barrierDismissible: false);
     }
-    var response = await http.post(Uri.parse(ApiServices.SignUp), headers: {"Content-Type": "application/json"},
-        body: jsonEncode({
-          "APIKey":API_KEY,
-          "CallFrom":PLATFORM,
-          "Name":name,
-          "EmailID":email,
-          "Mobile":phoneNumber,
-          "DOB":selectedDate,
-          "CountryCode":selectedPhoneCode,
-          "Country":selectedCountry,
-          "Pincode":postalCode,
-          "Addr":address,
-          "Gender":role,
-          "Pass":password
-        }));
+    var response = await http.post(Uri.parse(ApiServices.SignUp), headers: {"Content-Type": "application/json"}, body: jsonEncode({"APIKey": API_KEY, "CallFrom": PLATFORM, "Name": name, "EmailID": email, "Mobile": phoneNumber, "DOB": selectedDate, "CountryCode": selectedPhoneCode, "Country": selectedCountry, "Pincode": postalCode, "Addr": address, "Gender": role, "Pass": password}));
 
     print('register Response status: ${response.statusCode}');
     print('register Response body: ${response.body}');
@@ -67,10 +42,10 @@ class RegisterScreenController extends GetxController {
       Get.toNamed(Routes.HOME_SCREEN);
     } else if (response.statusCode == 200 && data["Success"] == false) {
       storage.erase();
-      Get.snackbar("Oops!", data["Message"], icon: const Icon(Icons.error, color: Colors.red), duration: const Duration(seconds: 1), colorText: textBlack, snackPosition: SnackPosition.TOP, backgroundColor: backgroundWhite);
+      Get.snackbar("Oops!", data["Message"], icon: const Icon(Icons.error, color: Colors.red), colorText: textBlack, snackPosition: SnackPosition.TOP, backgroundColor: backgroundWhite);
     } else {
       storage.erase();
-      Get.snackbar("Oops!", "Registration failed", icon: const Icon(Icons.error, color: Colors.red), duration: const Duration(seconds: 1), colorText: textBlack, snackPosition: SnackPosition.TOP, backgroundColor: backgroundWhite);
+      Get.snackbar("Oops!", "Registration failed", icon: const Icon(Icons.error, color: Colors.red), colorText: textBlack, snackPosition: SnackPosition.TOP, backgroundColor: backgroundWhite);
     }
   }
 }

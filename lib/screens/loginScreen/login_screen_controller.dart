@@ -32,7 +32,7 @@ class LoginScreenController extends GetxController {
       Get.toNamed(Routes.HOME_SCREEN);
     } else {
       storage.erase();
-      Get.snackbar("Oops!", "Please enter valid login credential", icon: const Icon(Icons.error, color: Colors.red), duration: const Duration(seconds: 1), colorText: Colors.white, snackPosition: SnackPosition.TOP, backgroundColor: backgroundCyan);
+      Get.snackbar("Oops!", "Please enter valid login credential", icon: const Icon(Icons.error, color: Colors.red), colorText: Colors.white, snackPosition: SnackPosition.TOP, backgroundColor: backgroundCyan);
     }
   }
 }

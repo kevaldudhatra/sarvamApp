@@ -126,7 +126,6 @@ class _MembershipScreenViewState extends State<MembershipScreenView> {
                                     (value) => {
                                       if (value)
                                         {
-                                          // Navigator.pushNamed(context, Routes.CATEGORY_SCREEN),
                                           Navigator.pushNamedAndRemoveUntil(context, Routes.CATEGORY_SCREEN, (r) => false),
                                         },
                                     },

@@ -11,7 +11,7 @@ import 'package:sarvam/widgets/loading_view.dart';
 class UploadScreenController extends GetxController {
   final storage = GetStorage();
 
-  Future<bool> uploadMedia({bool isLoading = true,required int contentID, required String workName, required String workDescription, required PlatformFile mediaFile}) async {
+  Future<bool> uploadMedia({bool isLoading = true, required int contentID, required String workName, required String workDescription, required PlatformFile mediaFile}) async {
     try {
       print('uploadMedia input Data $contentID');
       print('uploadMedia input Data $workName');
@@ -21,7 +21,7 @@ class UploadScreenController extends GetxController {
         Get.dialog(LoadingDialog(), barrierDismissible: false);
       }
       var request = http.MultipartRequest('POST', Uri.parse("https://sarvam.whizapps.in/API/UploadWork.ashx"));
-      request.headers.addAll({"Content-Type":"multipart/form-data; boundary=<calculated when request is sent>"});
+      request.headers.addAll({"Content-Type": "multipart/form-data; boundary=<calculated when request is sent>"});
       request.fields['APIKey'] = API_KEY;
       request.fields['CallFrom'] = PLATFORM;
       request.fields['UserID'] = storage.read(USER_ID);
@@ -29,7 +29,7 @@ class UploadScreenController extends GetxController {
       request.fields['Name'] = workName;
       request.fields['Desp'] = workDescription;
       request.files.add(
-         http.MultipartFile(
+        http.MultipartFile(
           'File',
           File(mediaFile.path!).readAsBytes().asStream(),
           File(mediaFile.path!).lengthSync(),
@@ -41,10 +41,10 @@ class UploadScreenController extends GetxController {
         Get.back();
       }
       if (response.statusCode == 200) {
-        Get.snackbar("Success", "Your work upload successfully", icon: const Icon(Icons.done, color: Colors.white), duration: const Duration(seconds: 1), colorText: Colors.white, snackPosition: SnackPosition.TOP, backgroundColor: backgroundCyan);
+        Get.snackbar("Success", "Your work upload successfully", icon: const Icon(Icons.done, color: Colors.white), colorText: Colors.white, snackPosition: SnackPosition.TOP, backgroundColor: backgroundCyan);
         return true;
       } else {
-        Get.snackbar("Oops!", "Your work upload failed", icon: const Icon(Icons.error, color: Colors.red), duration: const Duration(seconds: 1), colorText: Colors.white, snackPosition: SnackPosition.TOP, backgroundColor: backgroundCyan);
+        Get.snackbar("Oops!", "Your work upload failed", icon: const Icon(Icons.error, color: Colors.red), colorText: Colors.white, snackPosition: SnackPosition.TOP, backgroundColor: backgroundCyan);
         return false;
       }
     } catch (e) {

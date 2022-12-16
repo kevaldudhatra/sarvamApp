@@ -52,7 +52,7 @@ class _SubscriptionScreenViewState extends State<SubscriptionScreenView> {
               return LoadingDialog();
             } else {
               return Container(
-                margin: EdgeInsets.only(top: 50, left: 20, right: 20),
+                margin: const EdgeInsets.only(top: 50, left: 20, right: 20),
                 height: height,
                 child: Column(
                   children: [

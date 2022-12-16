@@ -5,7 +5,6 @@ import 'package:sarvam/utils/const_colors_key.dart';
 import 'package:sarvam/utils/const_fonts_key.dart';
 
 class CustomButton extends StatefulWidget {
-
   Function()? onTap;
   Color? borderColor;
   Color? buttonColor;
@@ -13,15 +12,7 @@ class CustomButton extends StatefulWidget {
   String? label;
   double? fontSize;
 
-  CustomButton({
-    Key? key,
-    this.onTap,
-    this.borderColor,
-    this.buttonColor,
-    this.labelColor,
-    this.label,
-    this.fontSize
-  }) : super(key: key);
+  CustomButton({Key? key, this.onTap, this.borderColor, this.buttonColor, this.labelColor, this.label, this.fontSize}) : super(key: key);
 
   @override
   State<CustomButton> createState() => _CustomButtonState();
@@ -38,7 +29,7 @@ class _CustomButtonState extends State<CustomButton> {
           child: Text(
             widget.label ?? "",
             textAlign: TextAlign.center,
-            style: TextStyle(fontSize: widget.fontSize ?? 15,fontFamily: INTER_SEMI_BOLD,color: widget.labelColor ?? Colors.black),
+            style: TextStyle(fontSize: widget.fontSize ?? 15, fontFamily: INTER_SEMI_BOLD, color: widget.labelColor ?? Colors.black),
           ),
         ),
       ),

@@ -11,7 +11,7 @@ import 'package:http/http.dart' as http;
 class MembershipScreenController extends GetxController {
   final storage = GetStorage();
 
-  Future<bool> purchasePlan(int planId,{bool isLoading = true}) async {
+  Future<bool> purchasePlan(int planId, {bool isLoading = true}) async {
     print("purchasePlan input Data $planId");
     if (isLoading) {
       Get.dialog(LoadingDialog(), barrierDismissible: false);
@@ -27,7 +27,7 @@ class MembershipScreenController extends GetxController {
       await storage.write(ACTIVE_PLAN, true);
       return true;
     } else {
-      Get.snackbar("Oops!", "Purchase failed, please try again later.", icon: const Icon(Icons.error, color: Colors.red), duration: const Duration(seconds: 1), colorText: Colors.white, snackPosition: SnackPosition.TOP, backgroundColor: backgroundCyan);
+      Get.snackbar("Oops!", "Purchase failed, please try again later.", icon: const Icon(Icons.error, color: Colors.red), colorText: Colors.white, snackPosition: SnackPosition.TOP, backgroundColor: backgroundCyan);
       return false;
     }
   }
