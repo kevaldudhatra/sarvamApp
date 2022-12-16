@@ -74,7 +74,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                         children: [
                           const Text(
                             "Otp",
-                            style: TextStyle(color: backgroundWhite, fontSize: 16, fontFamily: ROBOTO_MEDIUM),
+                            style: TextStyle(color: backgroundWhite, fontSize: 15, fontFamily: ROBOTO_MEDIUM),
                           ),
                           const SizedBox(height: 5),
                           CustomTextField(
@@ -87,7 +87,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                           const SizedBox(height: 20),
                           const Text(
                             "Password",
-                            style: TextStyle(color: backgroundWhite, fontSize: 16, fontFamily: ROBOTO_MEDIUM),
+                            style: TextStyle(color: backgroundWhite, fontSize: 15, fontFamily: ROBOTO_MEDIUM),
                           ),
                           const SizedBox(height: 5),
                           CustomTextField(

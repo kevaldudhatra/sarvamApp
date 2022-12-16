@@ -72,7 +72,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                         children: [
                           const Text(
                             "Email Address",
-                            style: TextStyle(color: backgroundWhite, fontSize: 16, fontFamily: ROBOTO_MEDIUM),
+                            style: TextStyle(color: backgroundWhite, fontSize: 15, fontFamily: ROBOTO_MEDIUM),
                           ),
                           const SizedBox(height: 5),
                           CustomTextField(

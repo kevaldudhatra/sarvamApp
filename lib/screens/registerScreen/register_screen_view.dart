@@ -539,7 +539,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     ),
                     const Text(
                       "Name*",
-                      style: TextStyle(color: backgroundWhite, fontSize: 16, fontFamily: ROBOTO_MEDIUM),
+                      style: TextStyle(color: backgroundWhite, fontSize: 15, fontFamily: ROBOTO_MEDIUM),
                     ),
                     const SizedBox(height: 5),
                     CustomTextField(
@@ -552,7 +552,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     const SizedBox(height: 20),
                     const Text(
                       "Email Address*",
-                      style: TextStyle(color: backgroundWhite, fontSize: 16, fontFamily: ROBOTO_MEDIUM),
+                      style: TextStyle(color: backgroundWhite, fontSize: 15, fontFamily: ROBOTO_MEDIUM),
                     ),
                     const SizedBox(height: 5),
                     CustomTextField(
@@ -565,7 +565,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     const SizedBox(height: 20),
                     const Text(
                       "Password*",
-                      style: TextStyle(color: backgroundWhite, fontSize: 16, fontFamily: ROBOTO_MEDIUM),
+                      style: TextStyle(color: backgroundWhite, fontSize: 15, fontFamily: ROBOTO_MEDIUM),
                     ),
                     const SizedBox(height: 5),
                     CustomTextField(
@@ -578,7 +578,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     const SizedBox(height: 20),
                     const Text(
                       "Date of Birth*",
-                      style: TextStyle(color: backgroundWhite, fontSize: 16, fontFamily: ROBOTO_MEDIUM),
+                      style: TextStyle(color: backgroundWhite, fontSize: 15, fontFamily: ROBOTO_MEDIUM),
                     ),
                     const SizedBox(height: 5),
                     Container(
@@ -593,14 +593,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         children: [
                           Text(
                             selectedDate != "" ? selectedDate : "mm/dd/yyyy",
-                            style: TextStyle(color: selectedDate != "" ? textBlack : textBlack.withOpacity(0.5), fontSize: 18.0, fontFamily: ROBOTO_REGULAR),
+                            style: TextStyle(color: selectedDate != "" ? textBlack : Colors.grey, fontSize: 15.0, fontFamily: ROBOTO_REGULAR),
                           ),
                           IconButton(
                             padding: EdgeInsets.zero,
                             onPressed: () {
                               selectDate(context);
                             },
-                            icon: Image.asset(AppImages().calendarIcon, scale: 2.5),
+                            icon: Image.asset(AppImages().calendarIcon, scale: 3),
                           )
                         ],
                       ),
@@ -608,7 +608,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     const SizedBox(height: 20),
                     const Text(
                       "Phone*",
-                      style: TextStyle(color: backgroundWhite, fontSize: 16, fontFamily: ROBOTO_MEDIUM),
+                      style: TextStyle(color: backgroundWhite, fontSize: 15, fontFamily: ROBOTO_MEDIUM),
                     ),
                     const SizedBox(height: 5),
                     Container(
@@ -625,14 +625,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             width: 60,
                             child: DropdownButtonHideUnderline(
                               child: DropdownButton(
-                                icon: Image.asset(AppImages().dropdownIcon, scale: 2.5),
+                                icon: Image.asset(AppImages().dropdownIcon, scale: 3),
                                 value: selectedPhoneCode,
                                 items: phoneCodeList
                                     .map((item) => DropdownMenuItem<String>(
                                         value: item,
                                         child: Text(
                                           item,
-                                          style: const TextStyle(color: textBlack, fontSize: 18.0, fontFamily: ROBOTO_REGULAR),
+                                          style: const TextStyle(color: textBlack, fontSize: 15.0, fontFamily: ROBOTO_REGULAR),
                                         )))
                                     .toList(),
                                 onChanged: (item) => setState(() => selectedPhoneCode = item),
@@ -662,7 +662,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           children: [
                             const Text(
                               "Country*",
-                              style: TextStyle(color: backgroundWhite, fontSize: 16, fontFamily: ROBOTO_MEDIUM),
+                              style: TextStyle(color: backgroundWhite, fontSize: 15, fontFamily: ROBOTO_MEDIUM),
                             ),
                             const SizedBox(height: 5),
                             Container(
@@ -675,14 +675,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               ),
                               child: DropdownButtonHideUnderline(
                                 child: DropdownButton(
-                                  icon: Image.asset(AppImages().dropdownIcon, scale: 2.5),
+                                  icon: Image.asset(AppImages().dropdownIcon, scale: 3),
                                   value: selectedCountry,
                                   items: countryList
                                       .map((item) => DropdownMenuItem<String>(
                                           value: item,
                                           child: Text(
                                             item,
-                                            style: const TextStyle(color: textBlack, fontSize: 18.0, fontFamily: ROBOTO_REGULAR),
+                                            style: const TextStyle(color: textBlack, fontSize: 15.0, fontFamily: ROBOTO_REGULAR),
                                           )))
                                       .toList(),
                                   onChanged: (item) => setState(() => selectedCountry = item),
@@ -698,7 +698,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           children: [
                             const Text(
                               "Pincode",
-                              style: TextStyle(color: backgroundWhite, fontSize: 16, fontFamily: ROBOTO_MEDIUM),
+                              style: TextStyle(color: backgroundWhite, fontSize: 15, fontFamily: ROBOTO_MEDIUM),
                             ),
                             const SizedBox(height: 5),
                             SizedBox(
@@ -719,7 +719,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     const SizedBox(height: 20),
                     const Text(
                       "Address",
-                      style: TextStyle(color: backgroundWhite, fontSize: 16, fontFamily: ROBOTO_MEDIUM),
+                      style: TextStyle(color: backgroundWhite, fontSize: 15, fontFamily: ROBOTO_MEDIUM),
                     ),
                     const SizedBox(height: 5),
                     Container(
@@ -740,21 +740,21 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     const SizedBox(height: 20),
                     const Text(
                       "Gender",
-                      style: TextStyle(color: backgroundWhite, fontSize: 16, fontFamily: ROBOTO_MEDIUM),
+                      style: TextStyle(color: backgroundWhite, fontSize: 15, fontFamily: ROBOTO_MEDIUM),
                     ),
-                    const SizedBox(height: 5),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisSize: MainAxisSize.min,
                       children: [
                         SizedBox(
-                          width: 100,
+                          width: width / 3 - 15,
                           child: RadioListTile(
                               title: Transform.translate(
-                                offset: const Offset(-15, 0),
+                                offset: const Offset(-20,0),
                                 child: const Text(
-                                  'Male',
-                                  style: TextStyle(color: backgroundWhite, fontFamily: ROBOTO_REGULAR, fontSize: 16),
+                                  'Male ',overflow: TextOverflow.ellipsis,
+                                  style: TextStyle(color: backgroundWhite, fontFamily: ROBOTO_REGULAR, fontSize: 15),
                                 ),
                               ),
                               dense: true,
@@ -770,13 +770,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               }),
                         ),
                         SizedBox(
-                          width: 120,
+                          width: width / 3 - 10,
                           child: RadioListTile(
                               title: Transform.translate(
-                                offset: const Offset(-15, 0),
+                                offset: const Offset(-20, 0),
                                 child: const Text(
-                                  'Female',
-                                  style: TextStyle(color: backgroundWhite, fontFamily: ROBOTO_REGULAR, fontSize: 16),
+                                  'Female',overflow: TextOverflow.ellipsis,
+                                  style: TextStyle(color: backgroundWhite, fontFamily: ROBOTO_REGULAR, fontSize: 15),
                                 ),
                               ),
                               dense: true,
@@ -792,13 +792,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               }),
                         ),
                         SizedBox(
-                          width: 100,
+                          width: width / 3 - 15,
                           child: RadioListTile(
                               title: Transform.translate(
-                                offset: const Offset(-15, 0),
+                                offset: const Offset(-20, 0),
                                 child: const Text(
-                                  'Other',
-                                  style: TextStyle(color: backgroundWhite, fontFamily: ROBOTO_REGULAR, fontSize: 16),
+                                  'Other',overflow: TextOverflow.ellipsis,
+                                  style: TextStyle(color: backgroundWhite, fontFamily: ROBOTO_REGULAR, fontSize: 15),
                                 ),
                               ),
                               dense: true,

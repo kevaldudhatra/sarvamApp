@@ -84,7 +84,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         children: [
                           const Text(
                             "Email Address",
-                            style: TextStyle(color: backgroundWhite, fontSize: 16, fontFamily: ROBOTO_MEDIUM),
+                            style: TextStyle(color: backgroundWhite, fontSize: 15, fontFamily: ROBOTO_MEDIUM),
                           ),
                           const SizedBox(height: 5),
                           CustomTextField(
@@ -97,7 +97,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           const SizedBox(height: 20),
                           const Text(
                             "Password",
-                            style: TextStyle(color: backgroundWhite, fontSize: 16, fontFamily: ROBOTO_MEDIUM),
+                            style: TextStyle(color: backgroundWhite, fontSize: 15, fontFamily: ROBOTO_MEDIUM),
                           ),
                           const SizedBox(height: 5),
                           Stack(

@@ -38,7 +38,7 @@ class _CustomButtonState extends State<CustomButton> {
           child: Text(
             widget.label ?? "",
             textAlign: TextAlign.center,
-            style: TextStyle(fontSize: widget.fontSize ?? 16,fontFamily: INTER_SEMI_BOLD,color: widget.labelColor ?? Colors.black),
+            style: TextStyle(fontSize: widget.fontSize ?? 15,fontFamily: INTER_SEMI_BOLD,color: widget.labelColor ?? Colors.black),
           ),
         ),
       ),

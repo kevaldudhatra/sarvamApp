@@ -20,7 +20,7 @@ class CustomTextField extends StatefulWidget {
   double? contentPaddingRight = 15.0;
   double? fontSize;
   int? maxLength;
-  Color? hintColor = textBlack.withOpacity(0.50);
+  Color? hintColor = Colors.grey;
   Color? fontColor = textBlack;
   TextEditingController? textEditingController = TextEditingController(text: "");
   bool? readOnly;
@@ -69,7 +69,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
       textInputAction: widget.textInputAction ?? TextInputAction.done,
       keyboardType: widget.keyboardType ?? TextInputType.text,
       inputFormatters: widget.inputFormatters ?? [],
-      style: TextStyle(color: widget.fontColor ?? textBlack, fontSize: widget.fontSize ?? 18.0, fontFamily: ROBOTO_REGULAR),
+      style: TextStyle(color: widget.fontColor ?? textBlack, fontSize: widget.fontSize ?? 15.0, fontFamily: ROBOTO_REGULAR),
       cursorColor: textBlack,
       decoration: InputDecoration(
         counterText: "",
@@ -80,7 +80,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
           left: widget.contentPaddingLeft!,
           right: widget.contentPaddingRight!,
         ),
-        hintStyle: TextStyle(color: widget.hintColor ?? textBlack.withOpacity(0.5), fontSize: widget.fontSize ?? 18.0, fontFamily: ROBOTO_REGULAR),
+        hintStyle: TextStyle(color: widget.hintColor ?? Colors.grey, fontSize: widget.fontSize ?? 15.0, fontFamily: ROBOTO_REGULAR),
         filled: true,
         fillColor: backgroundWhite,
         enabledBorder: const OutlineInputBorder(
