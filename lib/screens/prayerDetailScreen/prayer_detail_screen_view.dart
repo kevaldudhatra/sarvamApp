@@ -1,5 +1,6 @@
 // ignore_for_file: must_be_immutable, prefer_typing_uninitialized_variables
 
+import 'package:chewie/chewie.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sarvam/routes/app_pages.dart';
@@ -8,6 +9,7 @@ import 'package:sarvam/utils/const_colors_key.dart';
 import 'package:sarvam/utils/const_image_key.dart';
 import 'package:sarvam/utils/const_fonts_key.dart';
 import 'package:sarvam/widgets/loading_view.dart';
+import 'package:video_player/video_player.dart';
 
 class PrayerDetailScreenView extends StatefulWidget {
   dynamic contentData;
@@ -22,10 +24,10 @@ class _PrayerDetailScreenViewState extends State<PrayerDetailScreenView> {
   TextEditingController commentController = TextEditingController();
   PrayerDetailScreenController prayerDetailScreenController = PrayerDetailScreenController();
 
-  // VideoPlayerController? videoPlayerController;
-  // ChewieController? chewieController;
-  // bool looping = false;
-  // bool autoplay = false;
+  VideoPlayerController? videoPlayerController;
+  ChewieController? chewieController;
+  bool looping = false;
+  bool autoplay = false;
 
   @override
   void initState() {
@@ -33,12 +35,12 @@ class _PrayerDetailScreenViewState extends State<PrayerDetailScreenView> {
     super.initState();
   }
 
-  // @override
-  // void dispose() {
-  //   videoPlayerController!.dispose();
-  //   chewieController!.dispose();
-  //   super.dispose();
-  // }
+  @override
+  void dispose() {
+    videoPlayerController!.dispose();
+    chewieController!.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -119,7 +121,7 @@ class _PrayerDetailScreenViewState extends State<PrayerDetailScreenView> {
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 crossAxisAlignment: CrossAxisAlignment.end,
                                 children: [
-                                  /*SizedBox(
+                                  SizedBox(
                                     height: 210,
                                     width: width - 40,
                                     child: Chewie(
@@ -137,12 +139,12 @@ class _PrayerDetailScreenViewState extends State<PrayerDetailScreenView> {
                                         ),
                                       ),
                                     ),
-                                  ),*/
-                                  SizedBox(
-                                    height: 210,
-                                    width: width - 40,
-                                    child: ClipRRect(borderRadius: BorderRadius.circular(15), child: Image.network(prayerDetailScreenController.contentDetails["ContentThumb"], fit: BoxFit.fill)),
                                   ),
+                                  // SizedBox(
+                                  //   height: 210,
+                                  //   width: width - 40,
+                                  //   child: ClipRRect(borderRadius: BorderRadius.circular(15), child: Image.network(prayerDetailScreenController.contentDetails["ContentThumb"], fit: BoxFit.fill)),
+                                  // ),
                                   GestureDetector(
                                     onTap: () {
                                       Navigator.pushNamed(context, Routes.UPLOAD_WORK_SCREEN, arguments: {"contentID": widget.contentData["ContentID"]});

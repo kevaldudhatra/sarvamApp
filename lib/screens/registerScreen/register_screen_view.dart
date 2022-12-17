@@ -34,6 +34,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   final storage = GetStorage();
   var role;
   String selectedDate = "";
+  String displayDate = "";
   String? selectedCountry = "India";
   List<String> countryList = [
     "Afghanistan",
@@ -505,7 +506,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   use24hFormat: true,
                   onDateTimeChanged: (DateTime newDate) {
                     setState(() {
-                      selectedDate = "${newDate.day}/${newDate.month}/${newDate.year}";
+                      selectedDate = "${newDate.year}-${newDate.month}-${newDate.day}";
+                      displayDate = "${newDate.day}-${newDate.month}-${newDate.year}";
                     });
                   }),
             ),
@@ -660,7 +662,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            selectedDate != "" ? selectedDate : "mm/dd/yyyy",
+                            selectedDate != "" ? displayDate : "mm/dd/yyyy",
                             style: TextStyle(color: selectedDate != "" ? textBlack : Colors.grey, fontSize: 15.0, fontFamily: ROBOTO_REGULAR),
                           ),
                           IconButton(
