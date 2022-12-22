@@ -815,9 +815,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisSize: MainAxisSize.min,
+                      mainAxisSize: MainAxisSize.max,
                       children: [
-                        Expanded(
+                        SizedBox(
+                          width: 95,
                           child: RadioListTile(
                               title: Transform.translate(
                                 offset: const Offset(-20, 0),
@@ -839,7 +840,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 });
                               }),
                         ),
-                        Expanded(
+                        SizedBox(
+                          width: 110,
                           child: RadioListTile(
                               title: Transform.translate(
                                 offset: const Offset(-20, 0),
@@ -861,7 +863,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 });
                               }),
                         ),
-                        Expanded(
+                        SizedBox(
+                          width: 100,
                           child: RadioListTile(
                               title: Transform.translate(
                                 offset: const Offset(-20, 0),

@@ -11,8 +11,12 @@ import 'package:sarvam/widgets/loading_view.dart';
 
 class DailyRoutineScreenView extends StatefulWidget {
   dynamic categoryData;
+  bool? categoryColor1 = false;
+  bool? categoryColor2 = false;
+  bool? categoryColor3 = false;
+  bool? categoryColor4 = false;
 
-  DailyRoutineScreenView({Key? key, required this.categoryData}) : super(key: key);
+  DailyRoutineScreenView({Key? key, required this.categoryData, this.categoryColor1, this.categoryColor2, this.categoryColor3, this.categoryColor4}) : super(key: key);
 
   @override
   State<DailyRoutineScreenView> createState() => _DailyRoutineScreenViewState();
@@ -115,7 +119,13 @@ class _DailyRoutineScreenViewState extends State<DailyRoutineScreenView> {
                                         selectedCategory = index;
                                       });
                                       Future.delayed(const Duration(milliseconds: 500), () {
-                                        Navigator.push(context, MaterialPageRoute(builder: (_) => PrayerScreenView(subCategoryData: dailyRoutineScreenController.subCategoryList[index])));
+                                        Navigator.push(context, MaterialPageRoute(builder: (_) => PrayerScreenView(
+                                            subCategoryData: dailyRoutineScreenController.subCategoryList[index],
+                                          categoryColor1: widget.categoryColor1,
+                                          categoryColor2: widget.categoryColor2,
+                                          categoryColor3: widget.categoryColor3,
+                                          categoryColor4: widget.categoryColor4,
+                                        )));
                                       });
                                     },
                                     child: Stack(
@@ -124,20 +134,51 @@ class _DailyRoutineScreenViewState extends State<DailyRoutineScreenView> {
                                         Container(
                                           alignment: Alignment.center,
                                           margin: const EdgeInsets.only(top: 15),
-                                          decoration: BoxDecoration(color: selectedCategory == index ? selectedCategoryGreen : backgroundWhite, borderRadius: const BorderRadius.all(Radius.circular(10))),
+                                          decoration: BoxDecoration(
+                                              color: selectedCategory == index && widget.categoryColor1!
+                                                  ? category1
+                                                  : selectedCategory == index && widget.categoryColor2!
+                                                      ? category2
+                                                      : selectedCategory == index && widget.categoryColor3!
+                                                          ? category3
+                                                          : selectedCategory == index && widget.categoryColor4!
+                                                              ? category4
+                                                              : backgroundWhite,
+                                              borderRadius: const BorderRadius.all(Radius.circular(10))),
                                           child: Text(
                                             dailyRoutineScreenController.subCategoryList[index]["Name"],
                                             style: TextStyle(fontSize: 15, fontFamily: ROBOTO_REGULAR, color: selectedCategory == index ? backgroundWhite : textBlack),
                                           ),
                                         ),
-                                        selectedCategory == index
+                                        selectedCategory == index && widget.categoryColor1!
                                             ? Image.asset(
-                                                AppImages().selectedDoneIconGreen,
+                                                AppImages().selectedDoneIconRed,
                                                 fit: BoxFit.fill,
                                                 height: 30,
                                                 width: 30,
                                               )
-                                            : Container(),
+                                            : selectedCategory == index && widget.categoryColor2!
+                                                ? Image.asset(
+                                                    AppImages().selectedDoneIconGreen,
+                                                    fit: BoxFit.fill,
+                                                    height: 30,
+                                                    width: 30,
+                                                  )
+                                                : selectedCategory == index && widget.categoryColor3!
+                                                    ? Image.asset(
+                                                        AppImages().selectedDoneIconBlue,
+                                                        fit: BoxFit.fill,
+                                                        height: 30,
+                                                        width: 30,
+                                                      )
+                                                    : selectedCategory == index && widget.categoryColor4!
+                                                        ? Image.asset(
+                                                            AppImages().selectedDoneIconYellow,
+                                                            fit: BoxFit.fill,
+                                                            height: 30,
+                                                            width: 30,
+                                                          )
+                                                        : Container(),
                                         selectedCategory == index
                                             ? Positioned(
                                                 bottom: -5,
@@ -158,7 +199,7 @@ class _DailyRoutineScreenViewState extends State<DailyRoutineScreenView> {
                                 child: Text(
                                   "Oops!\nNo Data Found",
                                   textAlign: TextAlign.center,
-                                  style: TextStyle(fontSize: 20, fontFamily: ROBOTO_REGULAR, color: textBlack),
+                                  style: TextStyle(fontSize: 15, fontFamily: ROBOTO_REGULAR, color: textBlack),
                                 ),
                               ),
                   );

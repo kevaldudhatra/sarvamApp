@@ -71,6 +71,13 @@ class _CategoryScreenViewState extends State<CategoryScreenView> {
                       ),
                       const Spacer(),
                       Image.asset(AppImages().drawerIcon, color: pageIndicator, fit: BoxFit.fill, scale: 2.5),
+                      // IconButton(
+                      //   onPressed: (){
+                      //     print("DATA");
+                      //   },
+                      //   padding: EdgeInsets.zero,
+                      //   icon: Image.asset(AppImages().drawerIcon, color: pageIndicator, fit: BoxFit.fill, scale: 2.5),
+                      // ),
                     ],
                   ),
                 ),
@@ -91,7 +98,7 @@ class _CategoryScreenViewState extends State<CategoryScreenView> {
                             children: [
                               GestureDetector(
                                 onTap: () {
-                                  Navigator.push(context, MaterialPageRoute(builder: (_) => DailyRoutineScreenView(categoryData: categoryScreenController.categoryList[0])));
+                                  Navigator.push(context, MaterialPageRoute(builder: (_) => DailyRoutineScreenView(categoryData: categoryScreenController.categoryList[0],categoryColor1: true)));
                                 },
                                 child: SizedBox(
                                   width: width / 2 - 25,
@@ -110,7 +117,7 @@ class _CategoryScreenViewState extends State<CategoryScreenView> {
                               ),
                               GestureDetector(
                                 onTap: () {
-                                  Navigator.push(context, MaterialPageRoute(builder: (_) => DailyRoutineScreenView(categoryData: categoryScreenController.categoryList[1])));
+                                  Navigator.push(context, MaterialPageRoute(builder: (_) => DailyRoutineScreenView(categoryData: categoryScreenController.categoryList[1],categoryColor2: true)));
                                 },
                                 child: SizedBox(
                                   width: width / 2 - 25,
@@ -136,7 +143,7 @@ class _CategoryScreenViewState extends State<CategoryScreenView> {
                             children: [
                               GestureDetector(
                                 onTap: () {
-                                  Navigator.push(context, MaterialPageRoute(builder: (_) => DailyRoutineScreenView(categoryData: categoryScreenController.categoryList[2])));
+                                  Navigator.push(context, MaterialPageRoute(builder: (_) => DailyRoutineScreenView(categoryData: categoryScreenController.categoryList[2],categoryColor3: true)));
                                 },
                                 child: SizedBox(
                                   width: width / 2 - 25,
@@ -155,7 +162,7 @@ class _CategoryScreenViewState extends State<CategoryScreenView> {
                               ),
                               GestureDetector(
                                 onTap: () {
-                                  Navigator.push(context, MaterialPageRoute(builder: (_) => DailyRoutineScreenView(categoryData: categoryScreenController.categoryList[3])));
+                                  Navigator.push(context, MaterialPageRoute(builder: (_) => DailyRoutineScreenView(categoryData: categoryScreenController.categoryList[3],categoryColor4: true)));
                                 },
                                 child: SizedBox(
                                   width: width / 2 - 25,

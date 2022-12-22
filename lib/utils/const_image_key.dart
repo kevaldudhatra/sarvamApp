@@ -30,8 +30,10 @@ class AppImages {
   final categoryIcon_3 = '${images}categoryIcon_3.png';
   final categoryIcon_4 = '${images}categoryIcon_4.png';
   final dailyRoutineBackground = '${images}dailyRoutineBackground.png';
-  final selectedDoneIconGreen = '${images}selectedDoneIconGreen.png';
   final selectedDoneIconRed = '${images}selectedDoneIconRed.png';
+  final selectedDoneIconGreen = '${images}selectedDoneIconGreen.png';
+  final selectedDoneIconBlue = '${images}selectedDoneIconBlue.png';
+  final selectedDoneIconYellow = '${images}selectedDoneIconYellow.png';
   final selectedLeafIcon = '${images}selectedLeafIcon.png';
   final dummyImage = '${images}dummyImage.png';
   final dummyChetImage = '${images}dummyChetImage.png';

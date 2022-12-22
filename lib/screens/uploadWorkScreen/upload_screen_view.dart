@@ -144,7 +144,7 @@ class _UploadScreenViewState extends State<UploadScreenView> {
                           ),
                           const SizedBox(height: 5),
                           Container(
-                            height: 100,
+                            height: 80,
                             decoration: const BoxDecoration(
                               color: backgroundWhite,
                               borderRadius: BorderRadius.all(Radius.circular(10)),
@@ -170,7 +170,7 @@ class _UploadScreenViewState extends State<UploadScreenView> {
                           ),
                           const SizedBox(height: 5),
                           Container(
-                            height: 150,
+                            height: 130,
                             width: width,
                             decoration: const BoxDecoration(
                               color: backgroundWhite,
@@ -191,7 +191,7 @@ class _UploadScreenViewState extends State<UploadScreenView> {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
-                                  Image.asset(AppImages().uploadFileIcon, width: 70, height: 70),
+                                  Image.asset(AppImages().uploadFileIcon, width: 65, height: 65),
                                   const Text(
                                     "Upload Work",
                                     style: TextStyle(color: textBlack, fontSize: 15, fontFamily: ROBOTO_BOLD),

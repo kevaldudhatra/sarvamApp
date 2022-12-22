@@ -11,8 +11,12 @@ import 'package:sarvam/widgets/loading_view.dart';
 
 class PrayerScreenView extends StatefulWidget {
   dynamic subCategoryData;
+  bool? categoryColor1 = false;
+  bool? categoryColor2 = false;
+  bool? categoryColor3 = false;
+  bool? categoryColor4 = false;
 
-  PrayerScreenView({Key? key, required this.subCategoryData}) : super(key: key);
+  PrayerScreenView({Key? key, required this.subCategoryData, this.categoryColor1, this.categoryColor2, this.categoryColor3, this.categoryColor4}) : super(key: key);
 
   @override
   State<PrayerScreenView> createState() => _PrayerScreenViewState();
@@ -209,20 +213,51 @@ class _PrayerScreenViewState extends State<PrayerScreenView> {
                                         Container(
                                           alignment: Alignment.center,
                                           margin: const EdgeInsets.only(top: 15),
-                                          decoration: BoxDecoration(color: selectedCategory == index ? selectedCategoryRed : backgroundWhite, borderRadius: const BorderRadius.all(Radius.circular(10))),
+                                          decoration: BoxDecoration(
+                                              color: selectedCategory == index && widget.categoryColor1!
+                                                  ? category1
+                                                  : selectedCategory == index && widget.categoryColor2!
+                                                      ? category2
+                                                      : selectedCategory == index && widget.categoryColor3!
+                                                          ? category3
+                                                          : selectedCategory == index && widget.categoryColor4!
+                                                              ? category4
+                                                              : backgroundWhite,
+                                              borderRadius: const BorderRadius.all(Radius.circular(10))),
                                           child: Text(
                                             prayerScreenController.contentList[index]["Name"],
                                             style: TextStyle(fontSize: 15, fontFamily: ROBOTO_REGULAR, color: selectedCategory == index ? backgroundWhite : textBlack),
                                           ),
                                         ),
-                                        selectedCategory == index
+                                        selectedCategory == index && widget.categoryColor1!
                                             ? Image.asset(
                                                 AppImages().selectedDoneIconRed,
                                                 fit: BoxFit.fill,
                                                 height: 30,
                                                 width: 30,
                                               )
-                                            : Container(),
+                                            : selectedCategory == index && widget.categoryColor2!
+                                                ? Image.asset(
+                                                    AppImages().selectedDoneIconGreen,
+                                                    fit: BoxFit.fill,
+                                                    height: 30,
+                                                    width: 30,
+                                                  )
+                                                : selectedCategory == index && widget.categoryColor3!
+                                                    ? Image.asset(
+                                                        AppImages().selectedDoneIconBlue,
+                                                        fit: BoxFit.fill,
+                                                        height: 30,
+                                                        width: 30,
+                                                      )
+                                                    : selectedCategory == index && widget.categoryColor4!
+                                                        ? Image.asset(
+                                                            AppImages().selectedDoneIconYellow,
+                                                            fit: BoxFit.fill,
+                                                            height: 30,
+                                                            width: 30,
+                                                          )
+                                                        : Container(),
                                         selectedCategory == index
                                             ? Positioned(
                                                 bottom: -5,
@@ -243,7 +278,7 @@ class _PrayerScreenViewState extends State<PrayerScreenView> {
                                 child: Text(
                                   "Oops!\nNo Data Found",
                                   textAlign: TextAlign.center,
-                                  style: TextStyle(fontSize: 20, fontFamily: ROBOTO_REGULAR, color: textBlack),
+                                  style: TextStyle(fontSize: 15, fontFamily: ROBOTO_REGULAR, color: textBlack),
                                 ),
                               ),
                   );

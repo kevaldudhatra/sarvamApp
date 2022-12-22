@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      title: "Sarvam App",
+      title: "Sarvam",
       defaultTransition: Transition.noTransition,
       onGenerateRoute: RouteGenerator().generateRoute,
     );

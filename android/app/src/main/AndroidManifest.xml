@@ -2,7 +2,7 @@
     package="com.example.sarvam">
     <uses-permission android:name="android.permission.INTERNET" />
    <application
-        android:label="sarvam"
+        android:label="Sarvam"
         android:name="${applicationName}"
         android:icon="@mipmap/launcher_icon">
         <activity

@@ -13,7 +13,6 @@ import 'package:video_player/video_player.dart';
 
 class PrayerDetailScreenView extends StatefulWidget {
   dynamic contentData;
-
   PrayerDetailScreenView({Key? key, required this.contentData}) : super(key: key);
 
   @override
@@ -24,22 +23,10 @@ class _PrayerDetailScreenViewState extends State<PrayerDetailScreenView> {
   TextEditingController commentController = TextEditingController();
   PrayerDetailScreenController prayerDetailScreenController = PrayerDetailScreenController();
 
-  VideoPlayerController? videoPlayerController;
-  ChewieController? chewieController;
-  bool looping = false;
-  bool autoplay = false;
-
   @override
   void initState() {
     prayerDetailScreenController.getContentDetails(contentID: widget.contentData["ContentID"]);
     super.initState();
-  }
-
-  @override
-  void dispose() {
-    videoPlayerController!.dispose();
-    chewieController!.dispose();
-    super.dispose();
   }
 
   @override
@@ -128,8 +115,8 @@ class _PrayerDetailScreenViewState extends State<PrayerDetailScreenView> {
                                       controller: ChewieController(
                                         videoPlayerController: VideoPlayerController.network(prayerDetailScreenController.contentDetails["ContentFile"]),
                                         autoInitialize: true,
-                                        autoPlay: autoplay,
-                                        looping: looping,
+                                        autoPlay: false,
+                                        looping: false,
                                         aspectRatio: 2,
                                         materialProgressColors: ChewieProgressColors(
                                           playedColor: backgroundCyan,
@@ -154,15 +141,16 @@ class _PrayerDetailScreenViewState extends State<PrayerDetailScreenView> {
                                       width: width * 0.45,
                                       alignment: Alignment.center,
                                       margin: const EdgeInsets.only(top: 10),
-                                      padding: const EdgeInsets.symmetric(horizontal: 15),
+                                      padding: const EdgeInsets.symmetric(horizontal: 10),
                                       decoration: BoxDecoration(color: backgroundCyan, borderRadius: BorderRadius.circular(22.5)),
                                       child: Row(
-                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                        mainAxisAlignment: MainAxisAlignment.center,
                                         children: [
-                                          Image.asset(AppImages().uploadIcon, color: backgroundWhite, scale: 2.5),
+                                          Image.asset(AppImages().uploadIcon, color: backgroundWhite, scale: 3),
+                                          const SizedBox(width: 5),
                                           const Text(
                                             "Upload your work",
-                                            style: TextStyle(fontFamily: ROBOTO_BOLD, color: backgroundWhite),
+                                            style: TextStyle(fontSize: 12,fontFamily: ROBOTO_BOLD, color: backgroundWhite),
                                           ),
                                         ],
                                       ),
@@ -519,7 +507,7 @@ class _PrayerDetailScreenViewState extends State<PrayerDetailScreenView> {
                       child: Text(
                         "Oops!\nNo Data Found",
                         textAlign: TextAlign.center,
-                        style: TextStyle(fontSize: 20, fontFamily: ROBOTO_REGULAR, color: textBlack),
+                        style: TextStyle(fontSize: 15, fontFamily: ROBOTO_REGULAR, color: textBlack),
                       ),
                     );
             }
