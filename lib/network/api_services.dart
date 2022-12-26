@@ -13,4 +13,5 @@ class ApiServices {
   static String GetSubCategories = '$baseUrl/SubCat';
   static String GetContent = '$baseUrl/Content';
   static String GetContentDetails = '$baseUrl/ContentDetails';
+  static String addComment = '$baseUrl/AddComment';
 }
