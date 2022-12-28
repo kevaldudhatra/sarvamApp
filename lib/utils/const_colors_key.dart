@@ -11,3 +11,4 @@ const category1 = Color(0xFFF5775D);
 const category2 = Color(0xFF4BB681);
 const category3 = Color(0xFF89B6EA);
 const category4 = Color(0xFFFFAB2D);
+const drawerText = Color(0xFF596E80);

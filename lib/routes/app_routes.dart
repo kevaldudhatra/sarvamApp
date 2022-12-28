@@ -11,6 +11,7 @@ abstract class Routes {
   static const RESET_PASSWORD_SCREEN = '/resetPasswordScreen';
 
   static const HOME_SCREEN = '/homeScreen';
+  static const DASHBOARD_SCREEN = '/dashboardScreen';
   static const SUBSCRIPTION_SCREEN = '/subscriptionScreen';
   static const MEMBERSHIP_SCREEN = '/memberShipScreen';
   static const CATEGORY_SCREEN = '/categoryScreen';

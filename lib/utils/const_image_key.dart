@@ -42,6 +42,13 @@ class AppImages {
   final uploadFileIcon = '${images}uploadFileIcon.png';
   final closeIcon = '${images}closeIcon.png';
   final dummyFileIcon = '${images}dummyFileIcon.png';
+  final drawerCloseIcon = '${images}drawerCloseIcon.png';
+  final profileImage = '${images}profileImage.png';
+  final dashboardIcon = '${images}dashboardIcon.png';
+  final myWorkIcon = '${images}myWorkIcon.png';
+  final myProfileIcon = '${images}myProfileIcon.png';
+  final orderListIcon = '${images}orderListIcon.png';
+  final feedbackIcon = '${images}feedbackIcon.png';
 
 
 // loading view

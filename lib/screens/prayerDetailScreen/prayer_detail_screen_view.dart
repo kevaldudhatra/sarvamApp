@@ -222,7 +222,6 @@ class _PrayerDetailScreenViewState extends State<PrayerDetailScreenView> {
                                               onTap: () {
                                                 if (commentController.text.toString().isNotEmpty) {
                                                   prayerDetailScreenController.addComment(contentID: widget.contentData["ContentID"], commentMsg: commentController.text.trim().toString()).then((value) => {
-                                                        FocusScope.of(context).unfocus(),
                                                         commentController.clear(),
                                                       });
                                                 } else {
