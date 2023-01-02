@@ -14,4 +14,6 @@ class ApiServices {
   static String GetContent = '$baseUrl/Content';
   static String GetContentDetails = '$baseUrl/ContentDetails';
   static String addComment = '$baseUrl/AddComment';
+  static String GetUserProfile = '$baseUrl/ViewProfile';
+  static String UpdateUserProfile = '$baseUrl/UpdateProfile';
 }

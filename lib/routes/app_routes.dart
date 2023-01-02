@@ -11,7 +11,6 @@ abstract class Routes {
   static const RESET_PASSWORD_SCREEN = '/resetPasswordScreen';
 
   static const HOME_SCREEN = '/homeScreen';
-  static const DASHBOARD_SCREEN = '/dashboardScreen';
   static const SUBSCRIPTION_SCREEN = '/subscriptionScreen';
   static const MEMBERSHIP_SCREEN = '/memberShipScreen';
   static const CATEGORY_SCREEN = '/categoryScreen';
@@ -19,4 +18,10 @@ abstract class Routes {
   static const PRAYER_SCREEN = '/prayerScreen';
   static const PRAYER_DETAIL_SCREEN = '/PrayerDetailScreen';
   static const UPLOAD_WORK_SCREEN = '/uploadWorkScreen';
+  static const DASHBOARD_SCREEN = '/dashboardScreen';
+  static const MY_WORK_SCREEN = '/myWorkScreen';
+  static const MY_PROFILE_SCREEN = '/myProfileScreen';
+  static const ORDER_LIST_SCREEN = '/orderListScreen';
+  static const FEEDBACK_SCREEN = '/feedbackScreen';
+  static const GRIEVANCES_SCREEN = '/grievancesScreen';
 }

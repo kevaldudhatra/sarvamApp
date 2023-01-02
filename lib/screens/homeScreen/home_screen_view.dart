@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:sarvam/routes/app_pages.dart';
+import 'package:sarvam/screens/feedbackScreen/feedback_screen_view.dart';
+import 'package:sarvam/screens/grievancesScreen/grievances_screen_view.dart';
+import 'package:sarvam/screens/myProfileScreen/my_profile_screen_view.dart';
+import 'package:sarvam/screens/myWorkScreen/my_work_screen_view.dart';
+import 'package:sarvam/screens/orderListScreen/order_list_screen_view.dart';
 import 'package:sarvam/utils/const_colors_key.dart';
 import 'package:sarvam/utils/const_fonts_key.dart';
 import 'package:sarvam/utils/const_image_key.dart';
@@ -15,6 +20,7 @@ class HomeScreenView extends StatefulWidget {
 class _HomeScreenViewState extends State<HomeScreenView> {
   final GlobalKey<ScaffoldState> key = GlobalKey();
   int selectedIndex = 0;
+  int selectedDrawerItem = -1;
 
   void onItemTapped(int index) {
     setState(() {
@@ -93,93 +99,213 @@ class _HomeScreenViewState extends State<HomeScreenView> {
                       ),
                       const Divider(thickness: 1),
                       const SizedBox(height: 25),
-                      Container(
-                        height: 45,
-                        padding: const EdgeInsets.symmetric(horizontal: 15),
-                        decoration: const BoxDecoration(
-                          color: backgroundCyan,
-                          borderRadius: BorderRadius.all(Radius.circular(12)),
+                      InkWell(
+                        onTap: () {
+                          setState(() {
+                            selectedDrawerItem = 1;
+                          });
+                          Future.delayed(const Duration(milliseconds: 250), () {
+                            if (key.currentState!.isDrawerOpen) {
+                              key.currentState!.openEndDrawer();
+                            }
+                          });
+                        },
+                        child: Container(
+                          height: 50,
+                          padding: const EdgeInsets.symmetric(horizontal: 15),
+                          decoration: BoxDecoration(
+                            color: selectedDrawerItem == 1 ? backgroundCyan : backgroundWhite,
+                            borderRadius: const BorderRadius.all(Radius.circular(12)),
+                          ),
+                          child: Row(
+                            children: [
+                              Image.asset(AppImages().dashboardIcon,color:  selectedDrawerItem == 1 ? backgroundWhite : drawerText,fit: BoxFit.fill, height: 25, width: 25),
+                              const SizedBox(width: 5),
+                              Text(
+                                "Dashboard",
+                                textAlign: TextAlign.start,
+                                style: TextStyle(fontFamily: ROBOTO_REGULAR, fontSize: 15, color: selectedDrawerItem == 1 ? backgroundWhite : drawerText),
+                              ),
+                            ],
+                          ),
                         ),
-                        child: Row(
-                          children: [
-                            Image.asset(AppImages().dashboardIcon, fit: BoxFit.fill, height: 25, width: 25),
-                            const SizedBox(width: 5),
-                            const Text(
-                              "Dashboard",
-                              textAlign: TextAlign.start,
-                              style: TextStyle(fontFamily: ROBOTO_REGULAR, fontSize: 15, color: drawerText),
-                            ),
-                          ],
+                      ),
+                      InkWell(
+                        onTap: () {
+                          setState(() {
+                            selectedDrawerItem = 2;
+                          });
+                          Future.delayed(const Duration(milliseconds: 250), () {
+                            if (key.currentState!.isDrawerOpen) {
+                              key.currentState!.openEndDrawer();
+                              Navigator.push(context, MaterialPageRoute(builder: (_) => const MyWorkScreenView()));
+                            }
+                          });
+                        },
+                        child: Container(
+                          height: 50,
+                          padding: const EdgeInsets.symmetric(horizontal: 15),
+                          decoration: BoxDecoration(
+                            color: selectedDrawerItem == 2 ? backgroundCyan : backgroundWhite,
+                            borderRadius: const BorderRadius.all(Radius.circular(12)),
+                          ),
+                          child: Row(
+                            children: [
+                              Image.asset(AppImages().myWorkIcon,color:  selectedDrawerItem == 2 ? backgroundWhite : drawerText,fit: BoxFit.fill, height: 25, width: 25),
+                              const SizedBox(width: 5),
+                              Text(
+                                "My Work",
+                                textAlign: TextAlign.start,
+                                style: TextStyle(fontFamily: ROBOTO_REGULAR, fontSize: 15, color: selectedDrawerItem == 2 ? backgroundWhite : drawerText),
+                              ),
+                            ],
+                          ),
                         ),
                       ),
-                      Row(
-                        children: [
-                          Image.asset(AppImages().myWorkIcon, fit: BoxFit.fill, height: 25, width: 25),
-                          const SizedBox(width: 5),
-                          const Text(
-                            "My Work",
-                            textAlign: TextAlign.start,
-                            style: TextStyle(fontFamily: ROBOTO_REGULAR, fontSize: 15, color: drawerText),
+                      InkWell(
+                        onTap: () {
+                          setState(() {
+                            selectedDrawerItem = 3;
+                          });
+                          Future.delayed(const Duration(milliseconds: 250), () {
+                            if (key.currentState!.isDrawerOpen) {
+                              key.currentState!.openEndDrawer();
+                              Navigator.push(context, MaterialPageRoute(builder: (_) => const MyProfileScreenView()));
+                            }
+                          });
+                        },
+                        child: Container(
+                          height: 50,
+                          padding: const EdgeInsets.symmetric(horizontal: 15),
+                          decoration: BoxDecoration(
+                            color: selectedDrawerItem == 3 ? backgroundCyan : backgroundWhite,
+                            borderRadius: const BorderRadius.all(Radius.circular(12)),
                           ),
-                        ],
+                          child: Row(
+                            children: [
+                              Image.asset(AppImages().myProfileIcon,color:  selectedDrawerItem == 3 ? backgroundWhite : drawerText,fit: BoxFit.fill, height: 25, width: 25),
+                              const SizedBox(width: 5),
+                              Text(
+                                "My Profile",
+                                textAlign: TextAlign.start,
+                                style: TextStyle(fontFamily: ROBOTO_REGULAR, fontSize: 15, color: selectedDrawerItem == 3 ? backgroundWhite : drawerText),
+                              ),
+                            ],
+                          ),
+                        ),
                       ),
-                      Row(
-                        children: [
-                          Image.asset(AppImages().myProfileIcon, fit: BoxFit.fill, height: 25, width: 25),
-                          const SizedBox(width: 5),
-                          const Text(
-                            "My Profile",
-                            textAlign: TextAlign.start,
-                            style: TextStyle(fontFamily: ROBOTO_REGULAR, fontSize: 15, color: drawerText),
+                      InkWell(
+                        onTap: () {
+                          setState(() {
+                            selectedDrawerItem = 4;
+                          });
+                          Future.delayed(const Duration(milliseconds: 250), () {
+                            if (key.currentState!.isDrawerOpen) {
+                              key.currentState!.openEndDrawer();
+                              Navigator.push(context, MaterialPageRoute(builder: (_) => const OrderListScreenView()));
+                            }
+                          });
+                        },
+                        child: Container(
+                          height: 50,
+                          padding: const EdgeInsets.symmetric(horizontal: 15),
+                          decoration: BoxDecoration(
+                            color: selectedDrawerItem == 4 ? backgroundCyan : backgroundWhite,
+                            borderRadius: const BorderRadius.all(Radius.circular(12)),
                           ),
-                        ],
+                          child: Row(
+                            children: [
+                              Image.asset(AppImages().orderListIcon,color:  selectedDrawerItem == 4 ? backgroundWhite : drawerText,fit: BoxFit.fill, height: 25, width: 25),
+                              const SizedBox(width: 5),
+                              Text(
+                                "Order List",
+                                textAlign: TextAlign.start,
+                                style: TextStyle(fontFamily: ROBOTO_REGULAR, fontSize: 15, color: selectedDrawerItem == 4 ? backgroundWhite : drawerText),
+                              ),
+                            ],
+                          ),
+                        ),
                       ),
-                      Row(
-                        children: [
-                          Image.asset(AppImages().orderListIcon, fit: BoxFit.fill, height: 25, width: 25),
-                          const SizedBox(width: 5),
-                          const Text(
-                            "Order List",
-                            textAlign: TextAlign.start,
-                            style: TextStyle(fontFamily: ROBOTO_REGULAR, fontSize: 15, color: drawerText),
+                      InkWell(
+                        onTap: () {
+                          setState(() {
+                            selectedDrawerItem = 5;
+                          });
+                          Future.delayed(const Duration(milliseconds: 250), () {
+                            if (key.currentState!.isDrawerOpen) {
+                              key.currentState!.openEndDrawer();
+                              Navigator.push(context, MaterialPageRoute(builder: (_) => const FeedbackScreenView()));
+                            }
+                          });
+                        },
+                        child: Container(
+                          height: 50,
+                          padding: const EdgeInsets.symmetric(horizontal: 15),
+                          decoration: BoxDecoration(
+                            color: selectedDrawerItem == 5 ? backgroundCyan : backgroundWhite,
+                            borderRadius: const BorderRadius.all(Radius.circular(12)),
                           ),
-                        ],
+                          child: Row(
+                            children: [
+                              Image.asset(AppImages().feedbackIcon,color:  selectedDrawerItem == 5 ? backgroundWhite : drawerText,fit: BoxFit.fill, height: 25, width: 25),
+                              const SizedBox(width: 5),
+                              Text(
+                                "Feedback",
+                                textAlign: TextAlign.start,
+                                style: TextStyle(fontFamily: ROBOTO_REGULAR, fontSize: 15, color: selectedDrawerItem == 5 ? backgroundWhite : drawerText),
+                              ),
+                            ],
+                          ),
+                        ),
                       ),
-                      Row(
-                        children: [
-                          Image.asset(AppImages().feedbackIcon, fit: BoxFit.fill, height: 25, width: 25),
-                          const SizedBox(width: 5),
-                          const Text(
-                            "Feedback",
-                            textAlign: TextAlign.start,
-                            style: TextStyle(fontFamily: ROBOTO_REGULAR, fontSize: 15, color: drawerText),
+                      InkWell(
+                        onTap: () {
+                          setState(() {
+                            selectedDrawerItem = 6;
+                          });
+                          Future.delayed(const Duration(milliseconds: 250), () {
+                            if (key.currentState!.isDrawerOpen) {
+                              key.currentState!.openEndDrawer();
+                              Navigator.push(context, MaterialPageRoute(builder: (_) => const GrievancesScreenView()));
+                            }
+                          });
+                        },
+                        child: Container(
+                          height: 50,
+                          padding: const EdgeInsets.symmetric(horizontal: 15),
+                          decoration: BoxDecoration(
+                            color: selectedDrawerItem == 6 ? backgroundCyan : backgroundWhite,
+                            borderRadius: const BorderRadius.all(Radius.circular(12)),
                           ),
-                        ],
-                      ),
-                      Row(
-                        children: [
-                          Image.asset(AppImages().feedbackIcon, fit: BoxFit.fill, height: 25, width: 25),
-                          const SizedBox(width: 5),
-                          const Text(
-                            "Grievances",
-                            textAlign: TextAlign.start,
-                            style: TextStyle(fontFamily: ROBOTO_REGULAR, fontSize: 15, color: drawerText),
+                          child: Row(
+                            children: [
+                              Image.asset(AppImages().feedbackIcon,color:  selectedDrawerItem == 6 ? backgroundWhite : drawerText,fit: BoxFit.fill, height: 25, width: 25),
+                              const SizedBox(width: 5),
+                              Text(
+                                "Grievances",
+                                textAlign: TextAlign.start,
+                                style: TextStyle(fontFamily: ROBOTO_REGULAR, fontSize: 15, color: selectedDrawerItem == 6 ? backgroundWhite : drawerText),
+                              ),
+                            ],
                           ),
-                        ],
+                        ),
                       ),
                       const Spacer(),
-                      Container(
-                        height: 50,
-                        margin: const EdgeInsets.symmetric(horizontal: 15),
-                        decoration: const BoxDecoration(
-                          color: backgroundCyan,
-                          borderRadius: BorderRadius.all(Radius.circular(12)),
-                        ),
-                        child: const Center(
-                          child: Text(
-                            "Log Out",
-                            textAlign: TextAlign.start,
-                            style: TextStyle(fontFamily: ROBOTO_BOLD,color: backgroundWhite),
+                      InkWell(
+                        onTap: (){},
+                        child: Container(
+                          height: 50,
+                          margin: const EdgeInsets.symmetric(horizontal: 15),
+                          decoration: const BoxDecoration(
+                            color: backgroundCyan,
+                            borderRadius: BorderRadius.all(Radius.circular(12)),
+                          ),
+                          child: const Center(
+                            child: Text(
+                              "Log Out",
+                              textAlign: TextAlign.center,
+                              style: TextStyle(fontFamily: ROBOTO_BOLD,color: backgroundWhite),
+                            ),
                           ),
                         ),
                       )

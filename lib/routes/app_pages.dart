@@ -3,11 +3,17 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:sarvam/screens/categoryScreen/category_screen_view.dart';
 import 'package:sarvam/screens/dailyRoutineScreen/daily_routine_screen_view.dart';
+import 'package:sarvam/screens/dashboardScreen/dashboard_screen_view.dart';
+import 'package:sarvam/screens/feedbackScreen/feedback_screen_view.dart';
 import 'package:sarvam/screens/flashScreen/flash_screen_view.dart';
 import 'package:sarvam/screens/forgotPasswordScreen/forgot_screen_view.dart';
+import 'package:sarvam/screens/grievancesScreen/grievances_screen_view.dart';
 import 'package:sarvam/screens/homeScreen/home_screen_view.dart';
 import 'package:sarvam/screens/loginScreen/login_screen_view.dart';
 import 'package:sarvam/screens/membershipScreen/membership_screen_view.dart';
+import 'package:sarvam/screens/myProfileScreen/my_profile_screen_view.dart';
+import 'package:sarvam/screens/myWorkScreen/my_work_screen_view.dart';
+import 'package:sarvam/screens/orderListScreen/order_list_screen_view.dart';
 import 'package:sarvam/screens/prayerDetailScreen/prayer_detail_screen_view.dart';
 import 'package:sarvam/screens/prayerScreen/prayer_screen_view.dart';
 import 'package:sarvam/screens/registerScreen/register_screen_view.dart';
@@ -126,10 +132,20 @@ class _HomeNavigationState extends State<HomeNavigation> {
                 return PrayerDetailScreenView(contentData: null);
               case Routes.UPLOAD_WORK_SCREEN:
                 return const UploadScreenView();
+              case Routes.DASHBOARD_SCREEN:
+                return const DashboardScreenView();
+              case Routes.MY_WORK_SCREEN:
+                return const MyWorkScreenView();
+              case Routes.MY_PROFILE_SCREEN:
+                return const MyProfileScreenView();
+              case Routes.ORDER_LIST_SCREEN:
+                return const OrderListScreenView();
+              case Routes.FEEDBACK_SCREEN:
+                return const FeedbackScreenView();
+              case Routes.GRIEVANCES_SCREEN:
+                return const GrievancesScreenView();
             }
-            return storage.hasData(ACTIVE_PLAN) && storage.read(ACTIVE_PLAN) == true
-                ? const CategoryScreenView()
-                : const SubscriptionScreenView();
+            return storage.hasData(ACTIVE_PLAN) && storage.read(ACTIVE_PLAN) == true ? const CategoryScreenView() : const SubscriptionScreenView();
           },
         );
       },
